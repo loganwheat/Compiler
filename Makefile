@@ -12,7 +12,9 @@ default: run
 .java.class:
 	$(JAVAC) -cp $(CP) $*.java
 
-FILE=	Scanner.java parser.java sym.java ParserTest.java
+FILE=	Scanner.java parser.java sym.java ParserTest.java \
+		Program.java Memberdecls.java Fielddecls.java Methoddecls.java \
+		
 
 dump: parserD.java $(FILE:java=class)
 

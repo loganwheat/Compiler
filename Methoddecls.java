@@ -1,0 +1,4 @@
+class Methoddecls implements Token
+{
+    
+}

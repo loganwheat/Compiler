@@ -83,7 +83,9 @@ printline    {return newSym(sym.PRINTL, "printline");}
 "*"          {return newSym(sym.MULT, "*");}
 "/"          {return newSym(sym.DIV, "/");}
 "+"          {return newSym(sym.PLUS, "+");}
+"+"          {return newSym(sym.PREFIXPLUS, "+");}
 "-"          {return newSym(sym.MINUS, "-");}
+"-"          {return newSym(sym.PREFIXMINUS, "-");}
 "<"          {return newSym(sym.LESSTHAN, "<");}
 ">"          {return newSym(sym.GREATERTHAN, ">");}
 "<="         {return newSym(sym.LEQ, "<=");}

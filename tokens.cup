@@ -99,7 +99,8 @@ fielddecls ::=
 	   	fielddecl:fd fielddecls:fds
 	   	{: RESULT = new Fielddecls(fd, fds); :}
 	   	|
-	   	{: RESULT = new Fielddecls(); :}
+		fielddecl:fd
+	   	{: RESULT = new Fielddecls(fd, null); :}
 	   	;
 
 methoddecls ::=
@@ -148,17 +149,17 @@ returntype ::=
 		;
 
 type ::=
-		INT:i
-		{: RESULT = new Type(i); :}
+		INT
+		{: RESULT = new Type(1); :}
 		|
-		CHAR:c
-		{: RESULT = new Type(c); :}
+		CHAR
+		{: RESULT = new Type(2); :}
 		|
-		BOOL:b
-		{: RESULT = new Type(b); :}
+		BOOL
+		{: RESULT = new Type(3); :}
 		|
-		FLOAT:f
-		{: RESULT = new Type(f); :}
+		FLOAT
+		{: RESULT = new Type(4); :}
 		;
 
 argdecls ::=
@@ -172,15 +173,16 @@ argdeclList ::=
 		argdecl:a COMMA argdeclList:al
 		{: RESULT = new ArgdeclList(a, al); :}
 		|
-		{: RESULT = new ArgdeclList(); :}
+		argdecl:a
+		{: RESULT = new ArgdeclList(a); :}
 		;
 
 argdecl ::=
 		type:t ID:i
-		{: RESULT = new ArgdeclList(t, i); :}
+		{: RESULT = new Argdecl(t, i); :}
 		|
 		type:t ID:i OPENSB CLOSESB
-		{: RESULT = new ArgdeclList(t, i); :}
+		{: RESULT = new Argdecl(t, i); :}
 		;
 
 stmts ::=
@@ -284,8 +286,8 @@ expr ::=
 		INTLIT:i
 		{: RESULT = new Expr(i); :}
 		|
-		CHARLIT
-		{: RESULT = new Expr(); :}
+		CHARLIT:c
+		{: RESULT = new Expr(c); :}
 		|
 		STRLIT:s
 		{: RESULT = new Expr(s); :}
