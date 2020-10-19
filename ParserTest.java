@@ -1,7 +1,7 @@
 import java.io.*;
 import java_cup.runtime.*;
 
-public class ExampleParserTest{
+public class ParserTest{
 
   public static void main(String[] args) throws Exception
   {
@@ -18,7 +18,7 @@ public class ExampleParserTest{
       reader = new InputStreamReader(System.in);
     }
 
-    ExampleScanner scanner = new ExampleScanner(reader);   // create scanner
+    Scanner scanner = new Scanner(reader);   // create scanner
 
     parser parser = new parser(scanner); // create parser
     Program program = null;
