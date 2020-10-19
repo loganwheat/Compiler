@@ -31,9 +31,7 @@ terminal ASSMNT;
 terminal MULT;
 terminal DIV;
 terminal PLUS;
-terminal PREFIXPLUS;
 terminal MINUS;
-terminal PREFIXMINUS;
 terminal LESSTHAN;
 terminal GREATERTHAN;
 terminal LEQ;
@@ -63,7 +61,6 @@ non terminal Fielddecl fielddecl;
 non terminal Optionalexpr optionalexpr;
 non terminal Methoddecl methoddecl;
 non terminal Optionalsemi optionalsemi;
-non terminal Returntype returntype;
 non terminal Type type;
 non terminal Argdecls argdecls;
 non terminal ArgdeclList argdeclList;
@@ -91,16 +88,19 @@ program ::=
 		;
 
 memberdecls ::=
-	    fielddecls:fd methoddecls:md
-	    {: RESULT = new Memberdecls(fd, md); :}
+	    fielddecls:fds methoddecls:md
+	    {: RESULT = new Memberdecls(fds, md); :}
+		|
+		fielddecl:fd methoddecls:md
+		{: RESULT = new Memberdecls(fd, md); :}
+		|
+		methoddecls:md
+		{: RESULT = new Memberdecls(md); :}
 	    ;
 
 fielddecls ::=
 	   	fielddecl:fd fielddecls:fds
 	   	{: RESULT = new Fielddecls(fd, fds); :}
-	   	|
-		fielddecl:fd
-	   	{: RESULT = new Fielddecls(fd, null); :}
 	   	;
 
 methoddecls ::=
@@ -129,8 +129,11 @@ optionalexpr ::=
 		;
 
 methoddecl ::=
-		returntype:rt OPENP argdecls:a CLOSEP OPENCB fielddecls:fds stmts:s CLOSECB optionalsemi:os
-		{: RESULT = new Methoddecl(rt, a, fds, s, os); :}
+		type:t ID:i OPENP argdecls:a CLOSEP OPENCB fielddecls:fds stmts:s CLOSECB optionalsemi:os
+		{: RESULT = new Methoddecl(t, i, a, fds, s, os); :}
+		|
+		VOID ID:i OPENP argdecls:a CLOSEP OPENCB fielddecls:fds stmts:s CLOSECB optionalsemi:os
+		{: RESULT = new Methoddecl("void", i, a, fds, s, os); :}
 		;
 
 optionalsemi ::=
@@ -138,14 +141,6 @@ optionalsemi ::=
 		{: RESULT = new Optionalsemi(";"); :}
 		|
 		{: RESULT = new Optionalsemi(); :}
-		;
-
-returntype ::=
-		type:t
-		{: RESULT = new Returntype(t); :}
-		|
-		VOID
-		{: RESULT = new Returntype("void"); :}
 		;
 
 type ::=
@@ -307,10 +302,10 @@ expr ::=
 		TILDE expr:e
 		{: RESULT = new Expr(e); :}
 		|
-		PREFIXMINUS expr:e
+		MINUS expr:e
 		{: RESULT = new Expr(e); :}
 		|
-		PREFIXPLUS expr:e
+		PLUS expr:e
 		{: RESULT = new Expr(e); :}
 		|
 		OPENP type:t CLOSEP expr:e
