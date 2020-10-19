@@ -58,7 +58,6 @@ non terminal Memberdecls memberdecls;
 non terminal Fielddecls fielddecls;
 non terminal Methoddecls methoddecls;
 non terminal Fielddecl fielddecl;
-non terminal Optionalfinal optionalfinal;
 non terminal Optionalexpr optionalexpr;
 non terminal Methoddecl methoddecl;
 non terminal Optionalsemi optionalsemi;
@@ -109,19 +108,15 @@ methoddecls ::=
 	    ;
 
 fielddecl ::=
-	  	optionalfinal:of type:t ID:i optionalexpr:oe SEMI
-	  	{: RESULT = new Fielddecl(of, t, i, oe); :}
+		FINAL type:t ID:i optionalexpr:oe SEMI
+		{: RESULT = new Fielddecl(t, i, oe); :}
+		|
+	  	type:t ID:i optionalexpr:oe SEMI
+	  	{: RESULT = new Fielddecl(t, i, oe); :}
 	  	|
 	  	type:t ID:i OPENSB INTLIT:il CLOSESB SEMI
 	  	{: RESULT = new Fielddecl(t, i, il); :}
 	  	;
-
-optionalfinal ::=
-		FINAL
-	    {: RESULT = new Optionalfinal("final");  :}
-	    |
-	    {: RESULT = new Optionalfinal(); :}
-	    ;
 
 optionalexpr ::=
 		ASSMNT expr:e
@@ -319,6 +314,9 @@ expr ::=
 		|
 		binaryop:b
 		{: RESULT = new Expr(b); :}
+		|
+		OPENP expr:e1 QUESTIONMARK expr:e2 COLON expr:e3 CLOSEP
+		{: RESULT = new Expr(e1, e2, e3); :}
 		;
 
 binaryop ::= 
