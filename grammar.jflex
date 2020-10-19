@@ -98,7 +98,7 @@ printline    {return newSym(sym.PRINTL, "printline");}
 ":"          {return newSym(sym.COLON, ":");}
 
 
-{intlit}     {return newSym(sym.INTLIT, new Integer(yytext()));}
+{intlit}     {return newSym(sym.INTLIT, yytext());}
 {charlit}    {return newSym(sym.CHARLIT, yytext());}
 {strlit}     {return newSym(sym.STRLIT, yytext());}
 {floatlit}   {return newSym(sym.FLOATLIT, yytext());}

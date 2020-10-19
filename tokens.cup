@@ -47,8 +47,8 @@ terminal COLON;
 
 terminal int INTLIT;
 terminal String ID;
-terminal CHARLIT;
-terminal FLOATLIT;
+terminal String CHARLIT;
+terminal double FLOATLIT;
 terminal String STRLIT;
 
 //----------------
@@ -78,7 +78,11 @@ non terminal Printlinelist printlinelist;
 non terminal Expr expr;
 non terminal Binaryop binaryop;
 
-
+precedence left PLUS, MINUS;
+precedence left MULT, DIV;
+precedence left LESSTHAN, LEQ, GREATERTHAN, GEQ;
+precedence left EQUALTO, ANGLEB;
+precedence left AND, OR;
 
 program ::=
 		CLASS ID:i OPENCB memberdecls:md CLOSECB
@@ -165,6 +169,7 @@ argdecls ::=
 		{: RESULT = new Argdecls(al); :}
 		|
 		{: RESULT = new Argdecls(); :}
+		;
 
 argdeclList ::=
 		argdecl:a COMMA argdeclList:al
@@ -188,8 +193,46 @@ stmts ::=
 		{: RESULT = new Stmts(); :}
 		;
 
-// leaving stmt for a sec
-stmt ::= ;
+stmt ::= 
+		IF OPENP expr:e CLOSEP stmt:s ifEnd:ie
+		{: RESULT = new Stmt(e, s, ie); :}
+		|
+		WHILE OPENP expr:e CLOSEP stmt:s
+		{: RESULT = new Stmt(e, s); :}
+		|
+		name:n ASSMNT expr:e SEMI
+		{: RESULT = new Stmt(n, e); :}
+		|
+		READ OPENP readlist:rl CLOSEP SEMI
+		{: RESULT = new Stmt(rl); :}
+		|
+		PRINT OPENP printlist:pl CLOSEP SEMI
+		{: RESULT = new Stmt(pl); :}
+		|
+		PRINTL OPENP printlinelist:pll CLOSEP SEMI
+		{: RESULT = new Stmt(pll); :}
+		|
+		ID:i OPENP CLOSEP SEMI
+		{: RESULT = new Stmt(i); :}
+		|
+		ID:i OPENP args:a CLOSEP SEMI
+		{: RESULT = new Stmt(i, a); :}
+		|
+		RETURN SEMI
+		{: RESULT = new Stmt(); :}
+		|
+		RETURN expr:e SEMI
+		{: RESULT = new Stmt(e); :}
+		|
+		name:n INCREMENT SEMI
+		{: RESULT = new Stmt(n); :}
+		|
+		name:n DECREMENT SEMI
+		{: RESULT = new Stmt(n); :}
+		|
+		OPENCB fielddecls:fds CLOSECB optionalsemi:os
+		{: RESULT = new Stmt(fds, os); :}
+		;
 
 ifEnd ::=
 		ELSE stmt:s FI
@@ -231,8 +274,87 @@ printlist ::=
 		{: RESULT = new Printlist(e); :}
 		;
 
-// leaving expr for a sec
-expr ::= ;
+expr ::= 
+		name:n
+		{: RESULT = new Expr(n); :}
+		|
+		ID:i OPENP CLOSEP
+		{: RESULT = new Expr(i); :}
+		|
+		ID:i OPENP args:a CLOSEP
+		{: RESULT = new Expr(i, a); :}
+		|
+		INTLIT:i
+		{: RESULT = new Expr(i); :}
+		|
+		CHARLIT
+		{: RESULT = new Expr(); :}
+		|
+		STRLIT:s
+		{: RESULT = new Expr(s); :}
+		|
+		FLOATLIT:f
+		{: RESULT = new Expr(f); :}
+		|
+		TRUE
+		{: RESULT = new Expr(true); :}
+		|
+		FALSE
+		{: RESULT = new Expr(false); :}
+		|
+		OPENP expr:e CLOSEP
+		{: RESULT = new Expr(e); :}
+		|
+		TILDE expr:e
+		{: RESULT = new Expr(e); :}
+		|
+		MINUS expr:e
+		{: RESULT = new Expr(e); :}
+		|
+		PLUS expr:e
+		{: RESULT = new Expr(e); :}
+		|
+		OPENP type:t CLOSEP expr:e
+		{: RESULT = new Expr(t, e); :}
+		|
+		binaryop:b
+		{: RESULT = new Expr(b); :}
+		;
 
-// leaving binary op for a sec
-binaryop ::= ;
+binaryop ::= 
+		expr:lhs MULT expr:rhs
+		{: RESULT = new Binaryop(lhs, "*", rhs); :}
+		|
+		expr:lhs DIV expr:rhs
+		{: RESULT = new Binaryop(lhs, "/", rhs); :}
+		|
+		expr:lhs PLUS expr:rhs
+		{: RESULT = new Binaryop(lhs, "+", rhs); :}
+		|
+		expr:lhs MINUS expr:rhs
+		{: RESULT = new Binaryop(lhs, "-", rhs); :}
+		|
+		expr:lhs LESSTHAN expr:rhs
+		{: RESULT = new Binaryop(lhs, "<", rhs); :}
+		|
+		expr:lhs GREATERTHAN expr:rhs
+		{: RESULT = new Binaryop(lhs, ">", rhs); :}
+		|
+		expr:lhs LEQ expr:rhs
+		{: RESULT = new Binaryop(lhs, "<=", rhs); :}
+		|
+		expr:lhs GEQ expr:rhs
+		{: RESULT = new Binaryop(lhs, ">=", rhs); :}
+		|
+		expr:lhs EQUALTO expr:rhs
+		{: RESULT = new Binaryop(lhs, "==", rhs); :}
+		|
+		expr:lhs ANGLEB expr:rhs
+		{: RESULT = new Binaryop(lhs, "<>", rhs); :}
+		|
+		expr:lhs OR expr:rhs
+		{: RESULT = new Binaryop(lhs, "||", rhs); :}
+		|
+		expr:lhs AND expr:rhs
+		{: RESULT = new Binaryop(lhs, "&&", rhs); :}
+		;
