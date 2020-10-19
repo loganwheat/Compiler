@@ -81,9 +81,9 @@ non terminal Binaryop binaryop;
 
 
 program ::=
-	CLASS ID:i OPENCB memberdecls:md CLOSECB
-	{: RESULT = new Program(i, md); :}
-	;
+		CLASS ID:i OPENCB memberdecls:md CLOSECB
+		{: RESULT = new Program(i, md); :}
+		;
 
 memberdecls ::=
 	    fielddecls:fd methoddecls:md
@@ -91,11 +91,11 @@ memberdecls ::=
 	    ;
 
 fielddecls ::=
-	   fielddecl:fd fielddecls:fds
-	   {: RESULT = new Fielddecls(fd, fds); :}
-	   |
-	   {: RESULT = new Fielddecls(); :}
-	   ;
+	   	fielddecl:fd fielddecls:fds
+	   	{: RESULT = new Fielddecls(fd, fds); :}
+	   	|
+	   	{: RESULT = new Fielddecls(); :}
+	   	;
 
 methoddecls ::=
 	    methoddecl:md methoddecls:mds
@@ -105,21 +105,134 @@ methoddecls ::=
 	    ;
 
 fielddecl ::=
-	  optionalfinal:of type:t ID:i optionalexpr:oe SEMI
-	  {: RESULT = new Fielddecl(of, t, i, oe); :}
-	  |
-	  type:t ID:i OPENSB INTLIT:il CLOSESB SEMI
-	  {: RESULT = new fielddecl(t, i, il); :}
-	  ;
+	  	optionalfinal:of type:t ID:i optionalexpr:oe SEMI
+	  	{: RESULT = new Fielddecl(of, t, i, oe); :}
+	  	|
+	  	type:t ID:i OPENSB INTLIT:il CLOSESB SEMI
+	  	{: RESULT = new Fielddecl(t, i, il); :}
+	  	;
 
 optionalfinal ::=
-	      FINAL
-	      {: RESULT = new Optionalfinal("final");  :}
-	      |
-	      {: RESULT = new Optionalfinal(); :}
-	      ;
+		FINAL
+	    {: RESULT = new Optionalfinal("final");  :}
+	    |
+	    {: RESULT = new Optionalfinal(); :}
+	    ;
 
+optionalexpr ::=
+		ASSMNT expr:e
+		{: RESULT = new Optionalexpr(e); :}
+		|
+		{: RESULT = new Optionalexpr(); :}
+		;
 
+methoddecl ::=
+		returntype:rt OPENP argdecls:a CLOSEP OPENCB fielddecls:fds stmts:s CLOSECB optionalsemi:os
+		{: RESULT = new Methoddecl(rt, a, fds, s, os); :}
+		;
 
-non terminal dummy;
-dummy ::= ;
+optionalsemi ::=
+		SEMI
+		{: RESULT = new Optionalsemi(";"); :}
+		|
+		{: RESULT = new Optionalsemi(); :}
+		;
+
+returntype ::=
+		type:t
+		{: RESULT = new Returntype(t); :}
+		|
+		VOID
+		{: RESULT = new Returntype("void"); :}
+		;
+
+type ::=
+		INT:i
+		{: RESULT = new Type(i); :}
+		|
+		CHAR:c
+		{: RESULT = new Type(c); :}
+		|
+		BOOL:b
+		{: RESULT = new Type(b); :}
+		|
+		FLOAT:f
+		{: RESULT = new Type(f); :}
+		;
+
+argdecls ::=
+		argdeclList:al
+		{: RESULT = new Argdecls(al); :}
+		|
+		{: RESULT = new Argdecls(); :}
+
+argdeclList ::=
+		argdecl:a COMMA argdeclList:al
+		{: RESULT = new ArgdeclList(a, al); :}
+		|
+		{: RESULT = new ArgdeclList(); :}
+		;
+
+argdecl ::=
+		type:t ID:i
+		{: RESULT = new ArgdeclList(t, i); :}
+		|
+		type:t ID:i OPENSB CLOSESB
+		{: RESULT = new ArgdeclList(t, i); :}
+		;
+
+stmts ::=
+		stmt:s stmts:ss
+		{: RESULT = new Stmts(s, ss); :}
+		|
+		{: RESULT = new Stmts(); :}
+		;
+
+// leaving stmt for a sec
+stmt ::= ;
+
+ifEnd ::=
+		ELSE stmt:s FI
+		{: RESULT = new IfEnd(s); :}
+		|
+		FI
+		{: RESULT = new IfEnd(); :}
+		;
+
+name ::=
+		ID:i
+		{: RESULT = new Name(i); :}
+		|
+		ID:i OPENSB expr:e CLOSESB
+		{: RESULT = new Name(i, e); :}
+		;
+
+args ::=
+		expr:e COMMA args:a
+		{: RESULT = new Args(e, a); :}
+		|
+		expr:e
+		{: RESULT = new Args(e); :}
+		;
+
+readlist ::=
+		name:n COMMA args:a
+		{: RESULT = new Readlist(n, a); :}
+		|
+		name:n
+		{: RESULT = new Readlist(n); :}
+		;
+
+printlist ::=
+		expr:e COMMA readlist:rl
+		{: RESULT = new Printlist(e, rl); :}
+		|
+		expr:e
+		{: RESULT = new Printlist(e); :}
+		;
+
+// leaving expr for a sec
+expr ::= ;
+
+// leaving binary op for a sec
+binaryop ::= ;
