@@ -31,7 +31,9 @@ terminal ASSMNT;
 terminal MULT;
 terminal DIV;
 terminal PLUS;
+terminal PREFIXPLUS;
 terminal MINUS;
+terminal PREFIXMINUS;
 terminal LESSTHAN;
 terminal GREATERTHAN;
 terminal LEQ;
@@ -303,10 +305,10 @@ expr ::=
 		TILDE expr:e
 		{: RESULT = new Expr(e); :}
 		|
-		MINUS expr:e
+		PREFIXMINUS expr:e
 		{: RESULT = new Expr(e); :}
 		|
-		PLUS expr:e
+		PREFIXPLUS expr:e
 		{: RESULT = new Expr(e); :}
 		|
 		OPENP type:t CLOSEP expr:e
