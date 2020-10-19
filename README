@@ -1,0 +1,25 @@
+Logan Wheat
+lmw170130
+CS4386.001
+Project Assignment 1
+
+All of the necessary source code is included in the included file.
+
+Make sure that grammar.jflex, LexerTest.java, tokens.cup, testFile.txt, and Makefile are in the same directory as java-cup-11b.jar, java-cup-11b-runtime.jar, and
+jflex-1.8.2 for the Makefile to work properly.
+
+This code was written and compiled using openjdk version "11.0.7", so if you are having issues, try installing the proper OpenJDK version.
+
+The code references testFile.txt and outputs both to console and testFile-output.txt; therefore,
+insert whatever text you wish to test in testFile.txt
+
+Once the above has been confirmed, you can run the code using the Makefile.
+
+"$make" should work
+
+"$make run" also works
+
+"$make clean" can be called to remove some unnecessary files
+
+
+The three test files for the project and their test results are in directory testResults.

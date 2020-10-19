@@ -1,0 +1,125 @@
+import java_cup.runtime.*;
+
+terminal CLASS;
+terminal FINAL;
+terminal VOID;
+terminal INT;
+terminal CHAR;
+terminal BOOL;
+terminal FLOAT;
+terminal IF;
+terminal FI;
+terminal WHILE;
+terminal RETURN;
+terminal ELSE;
+terminal TRUE;
+terminal FALSE;
+terminal READ;
+terminal PRINT;
+terminal PRINTL;
+
+terminal SEMI;
+terminal COMMA;
+terminal OPENP;
+terminal CLOSEP;
+terminal OPENSB;
+terminal CLOSESB;
+terminal OPENCB;
+terminal CLOSECB;
+terminal TILDE;
+terminal ASSMNT;
+terminal MULT;
+terminal DIV;
+terminal PLUS;
+terminal MINUS;
+terminal LESSTHAN;
+terminal GREATERTHAN;
+terminal LEQ;
+terminal GEQ;
+terminal EQUALTO;
+terminal ANGLEB;
+terminal OR;
+terminal AND;
+terminal INCREMENT;
+terminal DECREMENT;
+terminal QUESTIONMARK;
+terminal COLON;
+
+terminal int INTLIT;
+terminal String ID;
+terminal CHARLIT;
+terminal FLOATLIT;
+terminal String STRLIT;
+
+//----------------
+
+non terminal Program program;
+non terminal Memberdecls memberdecls;
+non terminal Fielddecls fielddecls;
+non terminal Methoddecls methoddecls;
+non terminal Fielddecl fielddecl;
+non terminal Optionalfinal optionalfinal;
+non terminal Optionalexpr optionalexpr;
+non terminal Methoddecl methoddecl;
+non terminal Optionalsemi optionalsemi;
+non terminal Returntype returntype;
+non terminal Type type;
+non terminal Argdecls argdecls;
+non terminal ArgdeclList argdeclList;
+non terminal Argdecl argdecl;
+non terminal Stmts stmts;
+non terminal Stmt stmt;
+non terminal IfEnd ifEnd;
+non terminal Name name;
+non terminal Args args;
+non terminal Readlist readlist;
+non terminal Printlist printlist;
+non terminal Printlinelist printlinelist;
+non terminal Expr expr;
+non terminal Binaryop binaryop;
+
+
+
+program ::=
+	CLASS ID:i OPENCB memberdecls:md CLOSECB
+	{: RESULT = new Program(i, md); :}
+	;
+
+memberdecls ::=
+	    fielddecls:fd methoddecls:md
+	    {: RESULT = new Memberdecls(fd, md); :}
+	    ;
+
+fielddecls ::=
+	   fielddecl:fd fielddecls:fds
+	   {: RESULT = new Fielddecls(fd, fds); :}
+	   |
+	   {: RESULT = new Fielddecls(); :}
+	   ;
+
+methoddecls ::=
+	    methoddecl:md methoddecls:mds
+	    {: RESULT = new Methoddecls(md, mds); :}
+	    |
+	    {: RESULT = new Methoddecls(); :}
+	    ;
+
+fielddecl ::=
+	  optionalfinal:of type:t ID:i optionalexpr:oe SEMI
+	  {: RESULT = new Fielddecl(of, t, i, oe); :}
+	  |
+	  type:t ID:i OPENSB INTLIT:il CLOSESB SEMI
+	  {: RESULT = new fielddecl(t, i, il); :}
+	  ;
+
+optionalfinal ::=
+	      FINAL
+	      {: RESULT = new Optionalfinal("final");  :}
+	      |
+	      {: RESULT = new Optionalfinal(); :}
+	      ;
+
+
+
+non terminal dummy;
+dummy ::= ;

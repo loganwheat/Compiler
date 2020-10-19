@@ -1,0 +1,24 @@
+Token #45, has a value of: varName	line:8 col:0
+Token #44, has a value of: 100	line:9 col:0
+Token #44, has a value of: 1	line:10 col:0
+Token #47, has a value of: 3.14	line:11 col:0
+Token #46, has a value of: 'a'	line:12 col:0
+Token #46, has a value of: 'z'	line:13 col:0
+Token #46, has a value of: '_'	line:14 col:0
+Token #46, has a value of: '.'	line:15 col:0
+Token #48, has a value of: "abc"	line:16 col:0
+Token #48, has a value of: "sphinx of black quartz, judge my vow"	line:17 col:0
+Token #46, has a value of: '\t'	line:22 col:0
+Token #46, has a value of: '\n'	line:23 col:0
+Token #48, has a value of: "\\not a comment"	line:24 col:0
+Token #46, has a value of: '\\'	line:25 col:0
+Token #46, has a value of: '\''	line:26 col:0
+Token #48, has a value of: "\""	line:27 col:0
+Token #44, has a value of: 6	line:28 col:0
+Token #45, has a value of: oodDay	line:28 col:1
+Token #47, has a value of: 12.46	line:29 col:0
+Token #45, has a value of: e12	line:29 col:5
+Token #46, has a value of: ' '	line:30 col:0
+Token #45, has a value of: int2	line:31 col:0
+Token #45, has a value of: vo1d	line:32 col:0
+Token #45, has a value of: charles	line:33 col:0
