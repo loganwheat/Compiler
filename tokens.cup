@@ -112,10 +112,10 @@ methoddecls ::=
 
 fielddecl ::=
 		FINAL type:t ID:i optionalexpr:oe SEMI
-		{: RESULT = new Fielddecl(t, i, oe); :}
+		{: RESULT = new Fielddecl(true, t, i, oe); :}
 		|
 	  	type:t ID:i optionalexpr:oe SEMI
-	  	{: RESULT = new Fielddecl(t, i, oe); :}
+	  	{: RESULT = new Fielddecl(false, t, i, oe); :}
 	  	|
 	  	type:t ID:i OPENSB INTLIT:il CLOSESB SEMI
 	  	{: RESULT = new Fielddecl(t, i, il); :}
@@ -133,7 +133,7 @@ methoddecl ::=
 		{: RESULT = new Methoddecl(t, i, a, fds, s, os); :}
 		|
 		VOID ID:i OPENP argdecls:a CLOSEP OPENCB fielddecls:fds stmts:s CLOSECB optionalsemi:os
-		{: RESULT = new Methoddecl("void", i, a, fds, s, os); :}
+		{: RESULT = new Methoddecl(true, i, a, fds, s, os); :}
 		;
 
 optionalsemi ::=

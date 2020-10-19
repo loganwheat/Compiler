@@ -11,6 +11,6 @@ class Program implements Token
 
     public String toString(int t)
     {
-        return ("Program:\n" + "class " + id + " {" + memberdecls.toString(t+1) + "}");
+        return ("Program:\n" + "class " + id + " {" + memberdecls.toString(t+1) + "\n}");
     }
 }
