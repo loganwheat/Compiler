@@ -15,7 +15,9 @@ default: run
 FILE=	Scanner.java parser.java sym.java ParserTest.java \
 		Program.java Memberdecls.java Fielddecls.java Methoddecls.java \
 		Fielddecl.java Optionalexpr.java Methoddecl.java Optionalsemi.java \
-		
+		Type.java Argdecls.java ArgdeclList.java Argdecl.java Stmts.java Stmt.java \
+		IfEnd.java Name.java Args.java Readlist.java Printlist.java Printlinelist.java \
+		Expr.java Binaryop.java
 
 dump: parserD.java $(FILE:java=class)
 

@@ -29,17 +29,17 @@ class Fielddecl implements Token
         String ret = "";
         if (isIntLit == true)
         {
-            ret = type.toString(t) + " " + id.toString(t) + " [" + intlit.toString(t) + "] ;\n";
+            ret = type.toString(t) + " " + id + " [" + intlit.toString(t) + "] ;\n";
         }
         else
         {
             if (isFinal == true)
             {
-                ret = "final " + type.toString(t) + " " + id.toString(t) + " " + optionalexpr.toString(t) + ";\n";
+                ret = "final " + type.toString(t) + " " + id + " " + optionalexpr.toString(t) + ";\n";
             }
             else
             {
-                ret = type.toString(t) + " " + id.toString(t) + " " + optionalexpr.toString(t) + ";\n";
+                ret = type.toString(t) + " " + id + " " + optionalexpr.toString(t) + ";\n";
             }
         }
         return ret;

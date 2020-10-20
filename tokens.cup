@@ -174,10 +174,10 @@ argdeclList ::=
 
 argdecl ::=
 		type:t ID:i
-		{: RESULT = new Argdecl(t, i); :}
+		{: RESULT = new Argdecl(false, t, i); :}
 		|
 		type:t ID:i OPENSB CLOSESB
-		{: RESULT = new Argdecl(t, i); :}
+		{: RESULT = new Argdecl(true, t, i); :}
 		;
 
 stmts ::=
@@ -189,43 +189,43 @@ stmts ::=
 
 stmt ::= 
 		IF OPENP expr:e CLOSEP stmt:s ifEnd:ie
-		{: RESULT = new Stmt(e, s, ie); :}
+		{: RESULT = new Stmt(1, e, s, ie); :}
 		|
 		WHILE OPENP expr:e CLOSEP stmt:s
-		{: RESULT = new Stmt(e, s); :}
+		{: RESULT = new Stmt(2, e, s); :}
 		|
 		name:n ASSMNT expr:e SEMI
-		{: RESULT = new Stmt(n, e); :}
+		{: RESULT = new Stmt(3, n, e); :}
 		|
 		READ OPENP readlist:rl CLOSEP SEMI
-		{: RESULT = new Stmt(rl); :}
+		{: RESULT = new Stmt(4, rl); :}
 		|
 		PRINT OPENP printlist:pl CLOSEP SEMI
-		{: RESULT = new Stmt(pl); :}
+		{: RESULT = new Stmt(5, pl); :}
 		|
 		PRINTL OPENP printlinelist:pll CLOSEP SEMI
-		{: RESULT = new Stmt(pll); :}
+		{: RESULT = new Stmt(6, pll); :}
 		|
 		ID:i OPENP CLOSEP SEMI
-		{: RESULT = new Stmt(i); :}
+		{: RESULT = new Stmt(7, i); :}
 		|
 		ID:i OPENP args:a CLOSEP SEMI
-		{: RESULT = new Stmt(i, a); :}
+		{: RESULT = new Stmt(8, i, a); :}
 		|
 		RETURN SEMI
-		{: RESULT = new Stmt(); :}
+		{: RESULT = new Stmt(9); :}
 		|
 		RETURN expr:e SEMI
-		{: RESULT = new Stmt(e); :}
+		{: RESULT = new Stmt(10, e); :}
 		|
 		name:n INCREMENT SEMI
-		{: RESULT = new Stmt(n); :}
+		{: RESULT = new Stmt(11, n); :}
 		|
 		name:n DECREMENT SEMI
-		{: RESULT = new Stmt(n); :}
+		{: RESULT = new Stmt(12, n); :}
 		|
-		OPENCB fielddecls:fds CLOSECB optionalsemi:os
-		{: RESULT = new Stmt(fds, os); :}
+		OPENCB fielddecls:fds stmts:s CLOSECB optionalsemi:os
+		{: RESULT = new Stmt(13, fds, s, os); :}
 		;
 
 ifEnd ::=

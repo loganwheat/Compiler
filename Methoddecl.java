@@ -32,10 +32,10 @@ class Methoddecl implements Token
     {
         String ret = "";
         if (isVoid) {
-            ret = "void " + id.toString(t) + " (" + argdecls.toString(t) + ") {" + fielddecls.toString(t) + stmts.toString(t) + "}" + optionalsemi.toString(t) + "\n";
+            ret = "void " + id + " (" + argdecls.toString(t) + ") {" + fielddecls.toString(t) + stmts.toString(t) + "}" + optionalsemi.toString(t) + "\n";
         }
         else {
-            ret = type.toString(t) + id.toString(t) + " (" + argdecls.toString(t) + ") {" + fielddecls.toString(t) + stmts.toString(t) + "}" + optionalsemi.toString(t) + "\n";
+            ret = type.toString(t) + id + " (" + argdecls.toString(t) + ") {" + fielddecls.toString(t) + stmts.toString(t) + "}" + optionalsemi.toString(t) + "\n";
         }
 
         return ret;
