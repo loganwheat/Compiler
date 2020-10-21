@@ -128,5 +128,6 @@ class Stmt implements Token
             default:
                 ret = "ERROR in Stmt.java";
         }
+        return ret;
     }
 }

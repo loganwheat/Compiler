@@ -76,11 +76,14 @@ non terminal Printlinelist printlinelist;
 non terminal Expr expr;
 non terminal Binaryop binaryop;
 
+precedence left COMMA;
+precedence right ASSMNT;
+precedence left OR;
+precedence left AND;
 precedence left PLUS, MINUS;
 precedence left MULT, DIV;
 precedence left LESSTHAN, LEQ, GREATERTHAN, GEQ;
 precedence left EQUALTO, ANGLEB;
-precedence left AND, OR;
 
 program ::=
 		CLASS ID:i OPENCB memberdecls:md CLOSECB
@@ -268,54 +271,61 @@ printlist ::=
 		{: RESULT = new Printlist(e); :}
 		;
 
+printlinelist ::=
+		printlist:pl
+		{: RESULT = new Printlinelist(pl); :}
+		|
+		{: RESULT = new Printlinelist(); :}
+		;
+
 expr ::= 
 		name:n
-		{: RESULT = new Expr(n); :}
+		{: RESULT = new Expr(1, n); :}
 		|
 		ID:i OPENP CLOSEP
-		{: RESULT = new Expr(i); :}
+		{: RESULT = new Expr(2, i); :}
 		|
 		ID:i OPENP args:a CLOSEP
-		{: RESULT = new Expr(i, a); :}
+		{: RESULT = new Expr(3, i, a); :}
 		|
 		INTLIT:i
-		{: RESULT = new Expr(i); :}
+		{: RESULT = new Expr(4, i); :}
 		|
 		CHARLIT:c
-		{: RESULT = new Expr(c); :}
+		{: RESULT = new Expr(5, c); :}
 		|
 		STRLIT:s
-		{: RESULT = new Expr(s); :}
+		{: RESULT = new Expr(6, s); :}
 		|
 		FLOATLIT:f
-		{: RESULT = new Expr(f); :}
+		{: RESULT = new Expr(7, f); :}
 		|
 		TRUE
-		{: RESULT = new Expr(true); :}
+		{: RESULT = new Expr(8, true); :}
 		|
 		FALSE
-		{: RESULT = new Expr(false); :}
+		{: RESULT = new Expr(8, false); :}
 		|
 		OPENP expr:e CLOSEP
-		{: RESULT = new Expr(e); :}
+		{: RESULT = new Expr(9, e); :}
 		|
 		TILDE expr:e
-		{: RESULT = new Expr(e); :}
+		{: RESULT = new Expr(10, e); :}
 		|
 		MINUS expr:e
-		{: RESULT = new Expr(e); :}
+		{: RESULT = new Expr(11, e); :}
 		|
 		PLUS expr:e
-		{: RESULT = new Expr(e); :}
+		{: RESULT = new Expr(12, e); :}
 		|
 		OPENP type:t CLOSEP expr:e
-		{: RESULT = new Expr(t, e); :}
+		{: RESULT = new Expr(13, t, e); :}
 		|
 		binaryop:b
-		{: RESULT = new Expr(b); :}
+		{: RESULT = new Expr(14, b); :}
 		|
 		OPENP expr:e1 QUESTIONMARK expr:e2 COLON expr:e3 CLOSEP
-		{: RESULT = new Expr(e1, e2, e3); :}
+		{: RESULT = new Expr(15, e1, e2, e3); :}
 		;
 
 binaryop ::= 

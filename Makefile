@@ -21,13 +21,29 @@ FILE=	Scanner.java parser.java sym.java ParserTest.java \
 
 dump: parserD.java $(FILE:java=class)
 
-run: testFile.txt
+run: test1DE.txt test2DE.txt test3.txt test4.txt test5.txt
 
-testFile.txt: all
-	$(JAVA) -cp $(CP) ParserTest testFile.txt > testFile-output.txt
-	cat -n testFile-output.txt
+test1DE.txt: all
+	$(JAVA) -cp $(CP) ParserTest test1DE.txt > test1DE-output.txt
+	cat -n test1DE-output.txt
 
-all: Lexer.java parser.java $(FILE:java=class)
+test2DE.txt: all
+	$(JAVA) -cp $(CP) ParserTest test2DE.txt > test2DE-output.txt
+	cat -n test2DE-output.txt
+
+test3.txt: all
+	$(JAVA) -cp $(CP) ParserTest test3.txt > test3-output.txt
+	cat -n test3-output.txt
+
+test4.txt: all
+	$(JAVA) -cp $(CP) ParserTest test4.txt > test4-output.txt
+	cat -n test4-output.txt
+
+test5.txt: all
+	$(JAVA) -cp $(CP) ParserTest test5.txt > test5-output.txt
+	cat -n test5-output.txt
+
+all: Scanner.java parser.java $(FILE:java=class)
 
 clean:
 	rm -f *.class *~ *.bak Scanner.java parser.java sym.java

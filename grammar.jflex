@@ -6,7 +6,7 @@ import java_cup.runtime.*;
 %line
 %column
 %unicode
-%class Lexer
+%class Scanner
 
 %{
 

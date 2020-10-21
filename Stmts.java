@@ -21,7 +21,7 @@ class Stmts implements Token
             return "";
         }
         else {
-            return Stmt.toString(t) + Stmts.toString(t);
+            return stmt.toString(t) + stmts.toString(t);
         }
     }
 }

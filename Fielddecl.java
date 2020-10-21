@@ -29,7 +29,7 @@ class Fielddecl implements Token
         String ret = "";
         if (isIntLit == true)
         {
-            ret = type.toString(t) + " " + id + " [" + intlit.toString(t) + "] ;\n";
+            ret = type.toString(t) + " " + id + " [" + String.valueOf(intlit) + "] ;\n";
         }
         else
         {

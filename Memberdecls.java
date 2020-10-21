@@ -33,7 +33,7 @@ class Memberdecls implements Token
             ret = fielddecls.toString(t);
         }
         else {
-            ret fielddecl.toString(t) + " " + methoddecls.toString(t);
+            ret = fielddecl.toString(t) + " " + methoddecls.toString(t);
         }
         return ret;
     }
