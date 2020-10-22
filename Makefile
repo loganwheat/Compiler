@@ -21,15 +21,15 @@ FILE=	Scanner.java parser.java sym.java ParserTest.java \
 
 dump: parserD.java $(FILE:java=class)
 
-run: test1DE.txt test2DE.txt test3.txt test4.txt test5.txt
+run: test1FI.txt test2FI.txt test3.txt test4.txt test5.txt
 
-test1DE.txt: all
-	$(JAVA) -cp $(CP) ParserTest test1DE.txt > test1DE-output.txt
-	cat -n test1DE-output.txt
+test1FI.txt: all
+	$(JAVA) -cp $(CP) ParserTest test1FI.txt > test1FI-output.txt
+	cat -n test1FI-output.txt
 
-test2DE.txt: all
-	$(JAVA) -cp $(CP) ParserTest test2DE.txt > test2DE-output.txt
-	cat -n test2DE-output.txt
+test2FI.txt: all
+	$(JAVA) -cp $(CP) ParserTest test2FI.txt > test2FI-output.txt
+	cat -n test2FI-output.txt
 
 test3.txt: all
 	$(JAVA) -cp $(CP) ParserTest test3.txt > test3-output.txt
@@ -55,4 +55,4 @@ parser.java: tokens.cup
 	$(CUP) -interface -progress < tokens.cup
 
 parserD.java: tokens.cup
-	$(CUP) -interface -dump < tokens.cup
+	$(CUP) -interface -dump < tokens.cup 2> dump.txt

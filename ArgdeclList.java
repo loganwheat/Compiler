@@ -16,11 +16,14 @@ class ArgdeclList implements Token
 
     public String toString(int t)
     {
-        if (aList != null) {
-            return argdecl.toString(t) + " , " + aList.toString(t);
+        String ret = "";
+
+        if (aList != null && argdecl != null) {
+            ret = argdecl.toString(t) + " , " + aList.toString(t);
         }
-        else {
-            return argdecl.toString(t);
+        else if (argdecl != null){
+            ret = argdecl.toString(t);
         }
+        return ret;
     }
 }

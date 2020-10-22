@@ -16,11 +16,13 @@ class Name implements Token
 
     public String toString(int t)
     {
-        if(expr != null){
-            return id + "[" + expr.toString(t) + "]";
+        String ret = "";
+        if(expr != null && id != null){
+            ret = id + "[" + expr.toString(t) + "]";
         }
-        else {
-            return id;
+        else if (id != null){
+            ret = id;
         }
+        return ret;
     }
 }

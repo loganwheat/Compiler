@@ -16,11 +16,13 @@ class Readlist implements Token
 
     public String toString(int t)
     {
-        if(args != null) {
-            return name.toString(t) + " , " + args.toString(t);
+        String ret = "";
+        if(name != null && args != null) {
+            ret = name.toString(t) + " , " + args.toString(t);
         }
-        else {
-            return name.toString(t);
+        else if (name != null){
+            ret = name.toString(t);
         }
+        return ret;
     }
 }

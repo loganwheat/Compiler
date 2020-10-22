@@ -15,11 +15,13 @@ class Argdecls implements Token
 
     public String toString(int t)
     {
+        String ret = "";
         if (!exists) {
-            return "";
+            ret = "";
         }
-        else {
-            return aList.toString(t);
+        else if (aList != null) {
+            ret = aList.toString(t);
         }
+        return ret;
     }
 }

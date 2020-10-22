@@ -15,11 +15,14 @@ class IfEnd implements Token
 
     public String toString(int t)
     {
+        String ret = "";
         if(!hasStmt) {
-            return "fi";
+            ret = "fi";
         }
-        else {
-            return "else " + stmt.toString(t) + " fi";
+        else if (stmt != null){
+            ret = "else " + stmt.toString(t) + " fi";
         }
+
+        return ret;
     }
 }

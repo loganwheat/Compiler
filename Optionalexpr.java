@@ -15,11 +15,13 @@ class Optionalexpr implements Token
 
     public String toString(int t)
     {
+        String ret = "";
         if(!exists) {
-            return "";
+            ret = "";
         }
-        else {
-            return "= " + expr.toString(t);
+        else if (expr != null) {
+            ret = "= " + expr.toString(t);
         }
+        return ret;
     }
 }

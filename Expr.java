@@ -94,57 +94,81 @@ class Expr implements Token
 
         switch(statuscode) {
             case 1:
-                ret = name.toString(t);
+                if(name != null) {
+                    ret += name.toString(t);
+                }
                 break;
             case 2:
-                ret = id + " ()";
+                if (id != null) {
+                    ret += id + " ()";
+                }
                 break;
             case 3:
-                ret = id + "  (" + args.toString(t) + ") ";
+                if (id != null && args != null) {
+                    ret += id + "  (" + args.toString(t) + ") ";
+                }
                 break;
             case 4:
                 ret = String.valueOf(intlit);
                 break;
             case 5:
-                ret = charlit;
+                if (charlit != null) {
+                    ret += charlit;
+                }
                 break;
             case 6:
-                ret = strlit;
+                if (strlit != null) {
+                    ret += strlit;
+                }
                 break;
             case 7:
                 ret = String.valueOf(floatlit);
                 break;
             case 8:
                 if(trueorfalse == true) {
-                    ret = "true";
+                    ret += "true";
                 }
                 else if(trueorfalse == false) {
-                    ret = "false";
+                    ret += "false";
                 }
                 break;
             case 9:
-                ret = "(" + expr.toString(t) + ")";
+                if (expr != null) {
+                    ret += "(" + expr.toString(t) + ")";
+                }
                 break;
             case 10:
-                ret = "~" + expr.toString(t);
+                if (expr != null) {
+                    ret += "~" + expr.toString(t);   
+                }
                 break;
             case 11:
-                ret = "-" + expr.toString(t);
+                if (expr != null) {
+                    ret += "-" + expr.toString(t);   
+                }
                 break;
             case 12:
-                ret = "+" + expr.toString(t);
+                if (expr != null) {
+                    ret += "+" + expr.toString(t);   
+                }
                 break;
             case 13:
-                ret = "(" + type.toString(t) + ") " + expr.toString(t);
+                if (type != null && expr != null) {
+                    ret += "(" + type.toString(t) + ") " + expr.toString(t);   
+                }
                 break;
             case 14:
-                ret = binaryop.toString(t);
+                if (binaryop != null) {
+                    ret += binaryop.toString(t);
+                }
                 break;
             case 15:
-                ret = "( " + expr.toString(t) + " ? " + expr2.toString(t) + " : " + expr3.toString(t) + " )\n";
+                if (expr != null && expr2 != null && expr3 != null) {
+                    ret += "( " + expr.toString(t) + " ? " + expr2.toString(t) + " : " + expr3.toString(t) + " )\n";
+                }
                 break;
             default:
-                ret = "ERROR in Expr.java";
+                ret += "ERROR in Expr.java";
         }
         return ret;
     }

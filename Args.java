@@ -16,11 +16,13 @@ class Args implements Token
 
     public String toString(int t)
     {
-        if(args != null) {
-            return expr.toString(t) + " , " + args.toString(t); 
+        String ret = "";
+        if(expr != null && args != null) {
+            ret = expr.toString(t) + " , " + args.toString(t); 
         }
-        else {
-            return expr.toString(t);
+        else if (expr != null){
+            ret = expr.toString(t);
         }
+        return ret;
     }
 }

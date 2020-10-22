@@ -17,11 +17,13 @@ class Stmts implements Token
 
     public String toString(int t)
     {
+        String ret = "";
         if (!exists) {
-            return "";
+            ret = "";
         }
-        else {
-            return stmt.toString(t) + stmts.toString(t);
+        else if(stmt != null){
+            ret = stmt.toString(t) + stmts.toString(t);
         }
+        return ret;
     }
 }

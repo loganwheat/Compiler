@@ -13,11 +13,13 @@ class Argdecl implements Token
 
     public String toString(int t)
     {
-        if(containsBrackets) {
-            return type.toString(t) + id + " []";
+        String ret = "";
+        if(containsBrackets && type != null && id != null) {
+            ret = type.toString(t) + id + " []";
         }
-        else {
-            return type.toString(t) + id;
+        else if (type != null && id != null) {
+            ret = type.toString(t) + id;
         }
+        return ret;
     }
 }

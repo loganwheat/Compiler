@@ -15,11 +15,13 @@ class Printlinelist implements Token
 
     public String toString(int t)
     {
+        String ret = "";
         if(!exists) {
-            return "";
+            ret = "";
         }
-        else {
-            return printlist.toString(t);
+        else if (printlist != null) {
+            ret = printlist.toString(t);
         }
+        return ret;
     }
 }

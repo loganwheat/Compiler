@@ -16,11 +16,13 @@ class Printlist implements Token
 
     public String toString(int t)
     {
-        if (readlist != null) {
-            return expr.toString(t) + " , " + readlist.toString(t);
+        String ret = "";
+        if (expr != null && readlist != null) {
+            ret = expr.toString(t) + " , " + readlist.toString(t);
         }
-        else {
-            return expr.toString(t);
+        else if (expr != null) {
+            ret = expr.toString(t);
         }
+        return ret;
     }
 }

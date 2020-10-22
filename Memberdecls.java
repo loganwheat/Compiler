@@ -26,13 +26,13 @@ class Memberdecls implements Token
     public String toString(int t)
     {
         String ret = "";
-        if (fielddecls == null && fielddecl == null){
+        if (fielddecls == null && fielddecl == null && methoddecls != null){
             ret = methoddecls.toString(t);
         }
-        else if (fielddecl == null){
+        else if (fielddecl == null && fielddecls != null){
             ret = fielddecls.toString(t);
         }
-        else {
+        else if (fielddecl != null && methoddecls != null){
             ret = fielddecl.toString(t) + " " + methoddecls.toString(t);
         }
         return ret;

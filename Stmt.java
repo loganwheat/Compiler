@@ -87,13 +87,16 @@ class Stmt implements Token
 
         switch(statuscode) {
             case 1:
-                ret = "if (" + expr.toString(t) + ") " + stmt.toString(t) + ifEnd.toString(t);
+                if (expr != null && stmt != null && ifEnd != null)
+                    ret += "if (" + expr.toString(t) + ") " + stmt.toString(t) + ifEnd.toString(t);
                 break;
             case 2:
-                ret = "while (" + expr.toString(t) + ") " + stmt.toString(t);
+                if (expr!= null && stmt != null)
+                    ret += "while (" + expr.toString(t) + ") " + stmt.toString(t);
                 break;
             case 3:
-                ret = name.toString(t) + " = " + expr.toString(t) + ";\n";
+                if (name != null && expr != null)
+                    ret += name.toString(t) + " = " + expr.toString(t) + ";\n";
                 break;
             case 4:
                 ret = "read (" + readlist.toString(t) + ");\n";

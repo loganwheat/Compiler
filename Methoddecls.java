@@ -18,7 +18,7 @@ class Methoddecls implements Token
 
     public String toString(int t)
     {
-        if(exists) {
+        if(exists && methoddecl != null && methoddecls != null) {
             return methoddecl.toString(t) + " " + methoddecls.toString(t);
         }
         else {

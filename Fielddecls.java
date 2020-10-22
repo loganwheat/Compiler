@@ -12,11 +12,11 @@ class Fielddecls implements Token
     public String toString(int t)
     {
         String ret ="";
-        if (fielddecls == null)
+        if (fielddecls == null && fielddecl != null)
             ret = fielddecl.toString(t);
-        else
+        else if(fielddecl != null && fielddecls != null)
             ret = fielddecl.toString(t) + " " + fielddecls.toString(t);
-        
+
         return ret;
     }
 }
