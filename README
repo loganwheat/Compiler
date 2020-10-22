@@ -55,4 +55,4 @@ Printlinelist → Printlist | λ
 Expr →          Name | id ( ) | id ( Args ) | intlit | charlit | strlit | floatlit | true | false
                 | ( Expr ) | ~ Expr | - Expr | + Expr | ( Type ) Expr |
                 | Expr Binaryop Expr | ( Expr ? Expr : Expr )
-Binaryop →      * | / | + | - | < | > | <= | >= | == | <> | \|\| | &&
+Binaryop →      * | / | + | - | < | > | <= | >= | == | <> | \|\| | && 
