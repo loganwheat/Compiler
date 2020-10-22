@@ -11,17 +11,13 @@ Program:
 				if ((~true)) 
 					if (false) 
 						read (x);
-					else
+					else 
 						if ((yes == false)) 
 							print (2.0);
-						else
+						else 
 							x = 23;
-						fi
-					fi
-				else
+				else 
 					y = 37;
-				fi
-			fi
 			return;
 		}
 
@@ -40,20 +36,15 @@ Program:
 							if ((y > 3)) 
 								if ((x < 2)) 
 									read (x);
-								else
+								else 
 									read (thisName);
-								fi
-							else
+							else 
 								if ((34 == 2)) 
 									read (x2);
-								else
+								else 
 									read (x3);
-								fi
-							fi
-						else
+						else 
 							print (x);
-						fi
-			fi
 			print (theMan);
 			{ 
 			} ;
@@ -68,15 +59,12 @@ Program:
 				while (theMan) 
 					if ((superSalmon == upstream)) 
 						read (x);
-					else
+					else 
 						while (theWoman) 
 							if ((streetFighter2 == good)) 
 								virtuaFighter = bad;
-							else
+							else 
 								read (salmon);
-							fi
-					fi
-			fi
 			return 3.14159;
 		} 
 
@@ -88,31 +76,23 @@ Program:
 						while (batMan) 
 							if ((spiderMan + 3)) 
 								read (x);
-							else
+							else 
 								print (thisShouldBeTotallyNested);
-							fi
-					fi
-			fi
 			if (true) 
 				if (false) 
 					while (theman) 
 						if (theman2) 
 							read (x);
-						else
+						else 
 							print (x);
-						fi
-				fi
-			fi
 			if (true) 
 				while (themanPart2) 
 					if (bacon) 
 						print (enjoyTheSmell);
-					else
+					else 
 						print (KevinBacon);
-					fi
-			else
+			else 
 				wellhowabout = that;
-			fi
 		} 
 
 		void letsTestPrecedences () 

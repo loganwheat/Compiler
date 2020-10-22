@@ -4,7 +4,7 @@ class Stmt extends Token
     Expr expr;
     Stmt stmt;
     Stmts stmts;
-    IfEnd ifEnd;
+    //IfEnd ifEnd;
     Name name;
     Readlist readlist;
     Printlist printlist;
@@ -13,7 +13,11 @@ class Stmt extends Token
     Args args;
     Fielddecls fielddecls;
     Optionalsemi optionalsemi;
+    Stmt smatch;
+    Stmt smatch2;
+    Stmt sunmatch;
 
+    /*
     public Stmt(int code, Expr e, Stmt s, IfEnd ie)
     {
         statuscode = code;
@@ -21,6 +25,7 @@ class Stmt extends Token
         stmt = s;
         ifEnd = ie;
     }
+    */
     public Stmt(int code, Expr e, Stmt s)
     {
         statuscode = code;
@@ -80,6 +85,20 @@ class Stmt extends Token
         stmts = s;
         optionalsemi = os;
     }
+    public Stmt(int code, Expr e, Stmt s1, Stmt s2)
+    {
+        statuscode = code;
+        expr = e;
+
+        if(code == 14) {
+            smatch = s1;
+            smatch2 = s2;
+        }
+        else if (code == 16) {
+            smatch = s1;
+            sunmatch = s2;
+        }
+    }
 
     public String toString(int t)
     {
@@ -87,16 +106,13 @@ class Stmt extends Token
 
         switch(statuscode) {
             case 1:
-                if (expr != null && stmt != null && ifEnd != null)
-                    ret += "if (" + expr.toString(t) + ") " + stmt.toString(t+1) + ifEnd.toString(t);
+                ret += "while (" + expr.toString(t) + ") " + stmt.toString(t+1);
                 break;
             case 2:
-                if (expr!= null && stmt != null)
-                    ret += "while (" + expr.toString(t) + ") " + stmt.toString(t+1);
+                ret += "while (" + expr.toString(t) + ") " + stmt.toString(t+1);
                 break;
             case 3:
-                if (name != null && expr != null)
-                    ret += name.toString(t) + " = " + expr.toString(t) + ";";
+                ret += name.toString(t) + " = " + expr.toString(t) + ";";
                 break;
             case 4:
                 ret += "read (" + readlist.toString(t) + ");";
@@ -127,6 +143,15 @@ class Stmt extends Token
                 break;
             case 13:
                 ret += "{ " + fielddecls.toString(t+1) + stmts.toString(t+1) + getTabs(t) + "} " + optionalsemi.toString(t);
+                break;
+            case 14:
+                ret += "if (" + expr.toString(t) + ") " + smatch.toString(t+1) + getTabs(t) + "else " + smatch2.toString(t+1);
+                break;
+            case 15:
+                ret += "if (" + expr.toString(t) + ") " + stmt.toString(t+1);
+                break;
+            case 16:
+                ret += "if (" + expr.toString(t) + ") " + smatch.toString(t+1) + getTabs(t) + "else " + sunmatch.toString(t+1);
                 break;
             default:
                 ret += "ERROR in Stmt.java";

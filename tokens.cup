@@ -68,7 +68,8 @@ non terminal ArgdeclList argdeclList;
 non terminal Argdecl argdecl;
 non terminal Stmts stmts;
 non terminal Stmt stmt;
-non terminal IfEnd ifEnd;
+// comment ifend out for dangling else solution
+//non terminal IfEnd ifEnd;
 non terminal Name name;
 non terminal Args args;
 non terminal Readlist readlist;
@@ -76,6 +77,15 @@ non terminal Printlist printlist;
 non terminal Printlinelist printlinelist;
 non terminal Expr expr;
 non terminal Binaryop binaryop;
+
+// dangling else solutions
+non terminal Stmt standardStmt;
+non terminal Stmt stmtMatched;
+non terminal Stmt stmtUnmatched;
+non terminal Stmt ifMatched;
+non terminal Stmt ifUnmatched;
+non terminal Stmt whileMatched;
+non terminal Stmt whileUnmatched;
 
 precedence left COMMA;
 precedence right ASSMNT;
@@ -198,12 +208,56 @@ stmts ::=
 		;
 
 stmt ::= 
-		IF OPENP expr:e CLOSEP stmt:s ifEnd:ie
-		{: RESULT = new Stmt(1, e, s, ie); :}
+		stmtMatched:sm
+		{: RESULT =  sm; :}
 		|
-		WHILE OPENP expr:e CLOSEP stmt:s
+		stmtUnmatched:su
+		{: RESULT = su; :}
+		;
+
+stmtMatched ::=
+		ifMatched:im
+		{: RESULT = im; :}
+		|
+		whileMatched:wm
+		{:RESULT = wm; :}
+		|
+		standardStmt:ss
+		{:RESULT = ss; :}
+		;
+
+stmtUnmatched ::=
+		ifUnmatched:iu
+		{: RESULT = iu; :}
+		|
+		whileUnmatched:wu
+		{: RESULT = wu; :}
+		;
+
+ifMatched ::=
+		IF OPENP expr:e CLOSEP stmtMatched:s1 ELSE stmtMatched:s2
+		{: RESULT = new Stmt(14, e, s1, s2); :}
+		;
+
+ifUnmatched ::=
+		IF OPENP expr:e CLOSEP stmt:s
+		{: RESULT = new Stmt(15, e, s); :}
+		|
+		IF OPENP expr:e CLOSEP stmtMatched:sm ELSE stmtUnmatched:su
+		{: RESULT = new Stmt(16, e, sm, su); :}
+		;
+
+whileMatched ::=
+		WHILE OPENP expr:e CLOSEP stmtMatched:s
+		{: RESULT = new Stmt(1, e, s); :}
+		;
+
+whileUnmatched ::=
+		WHILE OPENP expr:e CLOSEP stmtUnmatched:s
 		{: RESULT = new Stmt(2, e, s); :}
-		|
+		;
+
+standardStmt ::= 
 		name:n ASSMNT expr:e SEMI
 		{: RESULT = new Stmt(3, n, e); :}
 		|
@@ -238,6 +292,7 @@ stmt ::=
 		{: RESULT = new Stmt(13, fds, s, os); :}
 		;
 
+/*
 ifEnd ::=
 		ELSE stmt:s FI
 		{: RESULT = new IfEnd(s); :}
@@ -245,6 +300,9 @@ ifEnd ::=
 		FI
 		{: RESULT = new IfEnd(); :}
 		;
+*/
+
+
 
 name ::=
 		ID:i

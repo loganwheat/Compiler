@@ -3,7 +3,7 @@ lmw170130
 CS4386.001
 Project Assignment 2
 
-Completed project without the dangling else solution. Run FI test files.
+Completed project with the dangling else solution. Run DE test files.
 
 All of the necessary source code is included in the included file.
 
@@ -48,7 +48,7 @@ Stmt →          if ( Expr ) Stmt IfEnd | while ( Expr ) Stmt | Name = Expr ;
                 | read ( Readlist ) ; | print ( Printlist ) ; | printline ( Printlinelist ) ;
                 | id ( ) ; | id ( Args ) ; | return ; | return Expr ; | Name ++ ; | Name -- ;
                 | { Fielddecls Stmts } Optionalsemi
-IfEnd →         else Stmt fi | fi
+IfEnd →         else Stmt | λ
 Name →          id | id [ Expr ]
 Args →          Expr , Args | Expr
 Readlist →      Name , Readlist | Name

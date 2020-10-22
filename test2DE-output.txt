@@ -38,12 +38,12 @@ Program:
 		{
 			{ 
 				if (true) 
-					if (thisShouldntHaveAnElse) 
-						read (betterNot);
-					fi
-				else
+					{ 
+						if (thisShouldntHaveAnElse) 
+							read (betterNot);
+					} 
+				else 
 					justAStatement = "ye";
-				fi
 			} ;
 
 		} 
