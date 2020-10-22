@@ -1,4 +1,4 @@
-class Fielddecls implements Token
+class Fielddecls extends Token
 {
     Fielddecl fielddecl;
     Fielddecls fielddecls;

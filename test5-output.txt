@@ -1,5 +1,8 @@
 Program:
-class onlyMethods {int x () {print (x);
-}
-
-}
+	class onlyMethods
+	{
+		intx () 
+		{
+			print (x);
+		}
+	}

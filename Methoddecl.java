@@ -1,4 +1,4 @@
-class Methoddecl implements Token
+class Methoddecl extends Token
 {
     Type type;
     String id;
@@ -30,12 +30,12 @@ class Methoddecl implements Token
 
     public String toString(int t)
     {
-        String ret = "";
+        String ret = getTabs(t);
         if (isVoid && id != null && argdecls != null && fielddecls != null && stmts != null) {
-            ret = "void " + id + " (" + argdecls.toString(t) + ") {" + fielddecls.toString(t) + stmts.toString(t) + "}" + optionalsemi.toString(t) + "\n";
+            ret += "void " + id + " (" + argdecls.toString(t) + ") " + getTabs(t) + "{" + fielddecls.toString(t+1) + stmts.toString(t+1) + getTabs(t) + "}" + optionalsemi.toString(t);
         }
         else if (type != null && argdecls != null && fielddecls != null && stmts != null) {
-            ret = type.toString(t) + id + " (" + argdecls.toString(t) + ") {" + fielddecls.toString(t) + stmts.toString(t) + "}" + optionalsemi.toString(t) + "\n";
+            ret += type.toString(t) + id + " (" + argdecls.toString(t) + ") " + getTabs(t) + "{" + fielddecls.toString(t+1) + stmts.toString(t+1) + getTabs(t) + "}" + optionalsemi.toString(t);
         }
 
         return ret;

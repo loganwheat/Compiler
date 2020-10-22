@@ -1,4 +1,4 @@
-class Args implements Token
+class Args extends Token
 {
     Expr expr;
     Args args;

@@ -1,4 +1,4 @@
-class Expr implements Token
+class Expr extends Token
 {
     int statuscode;
     Name name;
@@ -146,17 +146,17 @@ class Expr implements Token
                 break;
             case 10:
                 if (expr != null) {
-                    ret += "~" + expr.toString(t);   
+                    ret += "(~" + expr.toString(t) + ")";   
                 }
                 break;
             case 11:
                 if (expr != null) {
-                    ret += "-" + expr.toString(t);   
+                    ret += "(-" + expr.toString(t) + ")";   
                 }
                 break;
             case 12:
                 if (expr != null) {
-                    ret += "+" + expr.toString(t);   
+                    ret += "(+" + expr.toString(t) + ")";   
                 }
                 break;
             case 13:
@@ -171,7 +171,7 @@ class Expr implements Token
                 break;
             case 15:
                 if (expr != null && expr2 != null && expr3 != null) {
-                    ret += "( " + expr.toString(t) + " ? " + expr2.toString(t) + " : " + expr3.toString(t) + " )\n";
+                    ret += "( " + expr.toString(t) + " ? " + expr2.toString(t) + " : " + expr3.toString(t) + " )";
                 }
                 break;
             default:

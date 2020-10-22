@@ -1,4 +1,4 @@
-class Binaryop implements Token
+class Binaryop extends Token
 {
     Expr l, r;
     String bo;
@@ -12,6 +12,6 @@ class Binaryop implements Token
 
     public String toString(int t)
     {
-        return l.toString(t) + " " + bo + " " + r.toString(t);
+        return "(" + l.toString(t) + " " + bo + " " + r.toString(t) + ")";
     }
 }

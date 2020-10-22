@@ -1,4 +1,4 @@
-class Printlist implements Token
+class Printlist extends Token
 {
     Expr expr;
     Readlist readlist;

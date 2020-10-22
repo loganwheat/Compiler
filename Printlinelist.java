@@ -1,4 +1,4 @@
-class Printlinelist implements Token
+class Printlinelist extends Token
 {
     Printlist printlist;
     boolean exists;

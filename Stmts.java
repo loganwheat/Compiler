@@ -1,4 +1,4 @@
-class Stmts implements Token
+class Stmts extends Token
 {
     Stmt stmt;
     Stmts stmts;

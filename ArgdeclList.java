@@ -1,4 +1,4 @@
-class ArgdeclList implements Token
+class ArgdeclList extends Token
 {
     Argdecl argdecl;
     ArgdeclList aList;

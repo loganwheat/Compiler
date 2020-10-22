@@ -1,4 +1,4 @@
-class Stmt implements Token
+class Stmt extends Token
 {
     int statuscode;
     Expr expr;
@@ -83,53 +83,53 @@ class Stmt implements Token
 
     public String toString(int t)
     {
-        String ret = "";
+        String ret = getTabs(t);
 
         switch(statuscode) {
             case 1:
                 if (expr != null && stmt != null && ifEnd != null)
-                    ret += "if (" + expr.toString(t) + ") " + stmt.toString(t) + ifEnd.toString(t);
+                    ret += "if (" + expr.toString(t) + ") " + stmt.toString(t+1) + ifEnd.toString(t);
                 break;
             case 2:
                 if (expr!= null && stmt != null)
-                    ret += "while (" + expr.toString(t) + ") " + stmt.toString(t);
+                    ret += "while (" + expr.toString(t) + ") " + stmt.toString(t+1);
                 break;
             case 3:
                 if (name != null && expr != null)
-                    ret += name.toString(t) + " = " + expr.toString(t) + ";\n";
+                    ret += name.toString(t) + " = " + expr.toString(t) + ";";
                 break;
             case 4:
-                ret = "read (" + readlist.toString(t) + ");\n";
+                ret += "read (" + readlist.toString(t) + ");";
                 break;
             case 5:
-                ret = "print (" + printlist.toString(t) + ");\n";
+                ret += "print (" + printlist.toString(t) + ");";
                 break;
             case 6:
-                ret = "printline (" + printlinelist.toString(t) + ");\n";
+                ret += "printline (" + printlinelist.toString(t) + ");";
                 break;
             case 7:
-                ret = id + " ();\n";
+                ret += id + " ();";
                 break;
             case 8:
-                ret = id + " (" + args.toString(t) + ");\n";
+                ret += id + " (" + args.toString(t) + ");";
                 break;
             case 9:
-                ret = "return ;\n";
+                ret += "return;";
                 break;
             case 10:
-                ret = "return " + expr.toString(t) + ";\n";
+                ret += "return " + expr.toString(t) + ";";
                 break;
             case 11:
-                ret = name.toString(t) + "++;";
+                ret += name.toString(t) + "++;";
                 break;
             case 12:
-                ret = name.toString(t) + "--;";
+                ret += name.toString(t) + "--;";
                 break;
             case 13:
-                ret = "{ " + fielddecls.toString(t) + stmts.toString(t) + " } " + optionalsemi.toString(t);
+                ret += "{ " + fielddecls.toString(t+1) + stmts.toString(t+1) + getTabs(t) + "} " + optionalsemi.toString(t);
                 break;
             default:
-                ret = "ERROR in Stmt.java";
+                ret += "ERROR in Stmt.java";
         }
         return ret;
     }

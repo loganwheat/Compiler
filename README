@@ -1,17 +1,15 @@
 Logan Wheat
 lmw170130
 CS4386.001
-Project Assignment 1
+Project Assignment 2
+
+Completed project without the dangling else solution. Run FI test files.
 
 All of the necessary source code is included in the included file.
 
-Make sure that grammar.jflex, LexerTest.java, tokens.cup, testFile.txt, and Makefile are in the same directory as java-cup-11b.jar, java-cup-11b-runtime.jar, and
-jflex-1.8.2 for the Makefile to work properly.
+Make sure that all files in the zip folder are extracted into the same directory. The Makefile is dependent on the location of these files.
 
 This code was written and compiled using openjdk version "11.0.7", so if you are having issues, try installing the proper OpenJDK version.
-
-The code references testFile.txt and outputs both to console and testFile-output.txt; therefore,
-insert whatever text you wish to test in testFile.txt
 
 Once the above has been confirmed, you can run the code using the Makefile.
 
@@ -19,7 +17,42 @@ Once the above has been confirmed, you can run the code using the Makefile.
 
 "$make run" also works
 
+The above two commands will run tests 1-5 and output the results to both <testname>-output.txt as well as console.
+
+"$make <testfilename.txt>" will run your choice of the 5 included test files.
+
 "$make clean" can be called to remove some unnecessary files
 
 
-The three test files for the project and their test results are in directory testResults.
+The Implemented Grammar Is:
+
+Program →       class id { Memberdecls }
+Memberdecls →   Fielddecls Methoddecls
+Fielddecls →    Fielddecl Fielddecls | λ
+Methoddecls →   Methoddecl Methoddecls | λ
+Fielddecl →     Optionalfinal Type id Optionalexpr ;
+                | Type id [ intlit ] ;
+Optionalfinal → final | λ
+Optionalexpr →  = Expr | λ
+Methoddecl →    Returntype id ( Argdecls ) { Fielddecls Stmts } Optionalsemi
+Optionalsemi →  ; | λ
+Returntype →    Type | void
+Type →          int | char | bool | float
+Argdecls →      ArgdeclList | λ
+ArgdeclList →   Argdecl , ArgdeclList | Argdecl
+Argdecl →       Type id | Type id [ ]
+Stmts →         Stmt Stmts | λ
+Stmt →          if ( Expr ) Stmt IfEnd | while ( Expr ) Stmt | Name = Expr ;
+                | read ( Readlist ) ; | print ( Printlist ) ; | printline ( Printlinelist ) ;
+                | id ( ) ; | id ( Args ) ; | return ; | return Expr ; | Name ++ ; | Name -- ;
+                | { Fielddecls Stmts } Optionalsemi
+IfEnd →         else Stmt fi | fi
+Name →          id | id [ Expr ]
+Args →          Expr , Args | Expr
+Readlist →      Name , Readlist | Name
+Printlist →     Expr , Printlist | Expr
+Printlinelist → Printlist | λ
+Expr →          Name | id ( ) | id ( Args ) | intlit | charlit | strlit | floatlit | true | false
+                | ( Expr ) | ~ Expr | - Expr | + Expr | ( Type ) Expr |
+                | Expr Binaryop Expr | ( Expr ? Expr : Expr )
+Binaryop →      * | / | + | - | < | > | <= | >= | == | <> | \|\| | &&

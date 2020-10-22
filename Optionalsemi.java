@@ -1,4 +1,4 @@
-class Optionalsemi implements Token
+class Optionalsemi extends Token
 {
     boolean exists;
     String semicolon;

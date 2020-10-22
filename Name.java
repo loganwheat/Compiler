@@ -1,4 +1,4 @@
-class Name implements Token
+class Name extends Token
 {
     String id;
     Expr expr;

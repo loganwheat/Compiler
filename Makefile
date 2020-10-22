@@ -46,7 +46,7 @@ test5.txt: all
 all: Scanner.java parser.java $(FILE:java=class)
 
 clean:
-	rm -f *.class *~ *.bak Scanner.java parser.java sym.java
+	rm -f *.class *~ *.bak Scanner.java parser.java sym.java dump.txt
 
 Scanner.java: grammar.jflex
 	$(JFLEX) grammar.jflex

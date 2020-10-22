@@ -1,4 +1,4 @@
-class Argdecl implements Token
+class Argdecl extends Token
 {
     boolean containsBrackets;
     Type type;

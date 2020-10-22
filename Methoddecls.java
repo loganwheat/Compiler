@@ -1,4 +1,4 @@
-class Methoddecls implements Token
+class Methoddecls extends Token
 {
     boolean exists = false;
     Methoddecl methoddecl;
@@ -19,7 +19,7 @@ class Methoddecls implements Token
     public String toString(int t)
     {
         if(exists && methoddecl != null && methoddecls != null) {
-            return methoddecl.toString(t) + " " + methoddecls.toString(t);
+            return "\n" + methoddecl.toString(t) + " " + methoddecls.toString(t);
         }
         else {
             return "";

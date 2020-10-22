@@ -1,4 +1,4 @@
-class Fielddecl implements Token
+class Fielddecl extends Token
 {
     boolean isFinal = false;
     boolean isIntLit = false;
@@ -26,20 +26,20 @@ class Fielddecl implements Token
 
     public String toString(int t)
     {
-        String ret = "";
+        String ret = getTabs(t);
         if (isIntLit == true && type != null && id != null)
         {
-            ret = type.toString(t) + " " + id + " [" + intlit + "] ;\n";
+            ret += type.toString(t) + " " + id + " [" + intlit + "] ;";
         }
         else
         {
             if (isFinal == true && type != null && id != null)
             {
-                ret = "final " + type.toString(t) + " " + id + " " + optionalexpr.toString(t) + ";\n";
+                ret += "final " + type.toString(t) + " " + id + optionalexpr.toString(t) + ";";
             }
             else if(type != null && id != null)
             {
-                ret = type.toString(t) + " " + id + " " + optionalexpr.toString(t) + ";\n";
+                ret += type.toString(t) + " " + id + optionalexpr.toString(t) + ";";
             }
         }
         return ret;

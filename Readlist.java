@@ -1,4 +1,4 @@
-class Readlist implements Token
+class Readlist extends Token
 {
     Name name;
     Args args;

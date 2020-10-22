@@ -1,3 +1,4 @@
 Program:
-class testEmpty {
-}
+	class testEmpty
+	{
+	}

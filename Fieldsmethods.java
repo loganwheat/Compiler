@@ -1,4 +1,4 @@
-class Fieldsmethods implements Token
+class Fieldsmethods extends Token
 {
     Fielddecl fielddecl;
     Fieldsmethods fieldsmethods;

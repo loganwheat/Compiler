@@ -81,10 +81,10 @@ precedence left COMMA;
 precedence right ASSMNT;
 precedence left OR;
 precedence left AND;
+precedence left EQUALTO, ANGLEB;
+precedence left LESSTHAN, LEQ, GREATERTHAN, GEQ;
 precedence left PLUS, MINUS;
 precedence left MULT, DIV;
-precedence left LESSTHAN, LEQ, GREATERTHAN, GEQ;
-precedence left EQUALTO, ANGLEB;
 
 program ::=
 		CLASS ID:i OPENCB memberdecls:md CLOSECB

@@ -1,4 +1,4 @@
-class Optionalexpr implements Token
+class Optionalexpr extends Token
 {
     Expr expr;
     boolean exists;
@@ -20,7 +20,7 @@ class Optionalexpr implements Token
             ret = "";
         }
         else if (expr != null) {
-            ret = "= " + expr.toString(t);
+            ret = " = " + expr.toString(t);
         }
         return ret;
     }

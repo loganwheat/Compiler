@@ -1,4 +1,4 @@
-class Type implements Token
+class Type extends Token
 {
     int statuscode;
 
@@ -13,16 +13,16 @@ class Type implements Token
 
         switch(statuscode) {
             case 1:
-                ret = "int ";
+                ret = "int";
                 break;
             case 2:
-                ret = "char ";
+                ret = "char";
                 break;
             case 3:
-                ret = "bool ";
+                ret = "bool";
                 break;
             case 4:
-                ret = "float ";
+                ret = "float";
                 break;
             default:
                 ret = "ERROR in Type.java";

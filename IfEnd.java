@@ -1,4 +1,4 @@
-class IfEnd implements Token
+class IfEnd extends Token
 {
     Stmt stmt;
     boolean hasStmt;
@@ -15,12 +15,13 @@ class IfEnd implements Token
 
     public String toString(int t)
     {
-        String ret = "";
+        String ret = getTabs(t);
+
         if(!hasStmt) {
-            ret = "fi";
+            ret += "fi";
         }
         else if (stmt != null){
-            ret = "else " + stmt.toString(t) + " fi";
+            ret += "else" + stmt.toString(t+1) + getTabs(t) + "fi";
         }
 
         return ret;

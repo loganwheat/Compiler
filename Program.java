@@ -1,4 +1,4 @@
-class Program implements Token
+class Program extends Token
 {
     String id;
     Memberdecls memberdecls;
@@ -11,6 +11,6 @@ class Program implements Token
 
     public String toString(int t)
     {
-        return ("Program:\n" + "class " + id + " {" + memberdecls.toString(t+1) + "\n}");
+        return "Program:" + getTabs(t) + "class " + id + getTabs(t) + "{" + memberdecls.toString(t+1) + getTabs(t) + "}\n";
     }
 }
