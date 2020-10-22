@@ -4,10 +4,10 @@ class Expr implements Token
     Name name;
     String id;
     Args args;
-    int intlit;
+    String intlit;
     String charlit;
     String strlit;
-    double floatlit;
+    String floatlit;
     boolean trueorfalse;
     Expr expr;
     Expr expr2;
@@ -34,6 +34,12 @@ class Expr implements Token
         else if(code == 6) {
             strlit = str;
         }
+        else if(code == 7) {
+            floatlit = str;
+        }
+        else if(code == 4) {
+            intlit = str;
+        }
     }
 
     public Expr(int code, String i, Args a)
@@ -42,19 +48,20 @@ class Expr implements Token
         id = i;
         args = a;
     }
-
+/*
     public Expr(int code, int i)
     {
         statuscode = code;
         intlit = i;
     }
-
+*/
+/*
     public Expr(int code, double fl)
     {
         statuscode = code;
         floatlit = fl;
     }
-
+*/
     public Expr(int code, boolean tf)
     {
         statuscode = code;
@@ -109,7 +116,7 @@ class Expr implements Token
                 }
                 break;
             case 4:
-                ret = String.valueOf(intlit);
+                ret = intlit;
                 break;
             case 5:
                 if (charlit != null) {
@@ -122,7 +129,7 @@ class Expr implements Token
                 }
                 break;
             case 7:
-                ret = String.valueOf(floatlit);
+                ret = floatlit;
                 break;
             case 8:
                 if(trueorfalse == true) {

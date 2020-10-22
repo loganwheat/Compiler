@@ -1,0 +1,4 @@
+Program:
+class onlyFields {int  x ;
+
+}

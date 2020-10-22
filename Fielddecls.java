@@ -9,9 +9,16 @@ class Fielddecls implements Token
         fielddecls = fds;
     }
 
+    public Fielddecls()
+    {
+        fielddecl = null;
+        fielddecls = null;
+    }
+
     public String toString(int t)
     {
         String ret ="";
+
         if (fielddecls == null && fielddecl != null)
             ret = fielddecl.toString(t);
         else if(fielddecl != null && fielddecls != null)

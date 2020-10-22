@@ -1,0 +1,5 @@
+Program:
+class onlyMethods {int x () {print (x);
+}
+
+}

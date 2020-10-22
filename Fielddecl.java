@@ -5,7 +5,7 @@ class Fielddecl implements Token
     Type type;
     String id;
     Optionalexpr optionalexpr;
-    int intlit;
+    String intlit;
     
     public Fielddecl(boolean isF, Type t, String i, Optionalexpr oe)
     {
@@ -16,7 +16,7 @@ class Fielddecl implements Token
         id = i;
         optionalexpr = oe;
     }
-    public Fielddecl(Type t, String i, int il)
+    public Fielddecl(Type t, String i, String il)
     {
         isIntLit = true;
         type = t;
@@ -29,7 +29,7 @@ class Fielddecl implements Token
         String ret = "";
         if (isIntLit == true && type != null && id != null)
         {
-            ret = type.toString(t) + " " + id + " [" + String.valueOf(intlit) + "] ;\n";
+            ret = type.toString(t) + " " + id + " [" + intlit + "] ;\n";
         }
         else
         {

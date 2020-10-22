@@ -45,16 +45,17 @@ terminal DECREMENT;
 terminal QUESTIONMARK;
 terminal COLON;
 
-terminal int INTLIT;
+terminal String INTLIT;
 terminal String ID;
 terminal String CHARLIT;
-terminal double FLOATLIT;
+terminal String FLOATLIT;
 terminal String STRLIT;
 
 //----------------
 
 non terminal Program program;
 non terminal Memberdecls memberdecls;
+non terminal Fieldsmethods fieldsmethods;
 non terminal Fielddecls fielddecls;
 non terminal Methoddecls methoddecls;
 non terminal Fielddecl fielddecl;
@@ -91,6 +92,22 @@ program ::=
 		;
 
 memberdecls ::=
+		fieldsmethods:fm
+		{: RESULT = new Memberdecls(fm); :}
+		;
+
+fieldsmethods ::=
+		fielddecl:f fieldsmethods:fm
+		{: RESULT = new Fieldsmethods(f, fm); :}
+		|
+		methoddecl:md methoddecls:mds
+		{: RESULT = new Fieldsmethods(md, mds); :}
+		|
+		{: RESULT = new Fieldsmethods(); :}
+		;
+
+/*
+memberdecls ::=
 	    fielddecls:fds methoddecls:md
 	    {: RESULT = new Memberdecls(fds, md); :}
 		|
@@ -100,10 +117,13 @@ memberdecls ::=
 		methoddecls:md
 		{: RESULT = new Memberdecls(md); :}
 	    ;
+*/
 
 fielddecls ::=
 	   	fielddecl:fd fielddecls:fds
 	   	{: RESULT = new Fielddecls(fd, fds); :}
+		|
+		{: RESULT = new Fielddecls(); :}
 	   	;
 
 methoddecls ::=

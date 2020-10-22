@@ -24,8 +24,8 @@ public class ParserTest{
     Program program = null;
 
     try {
-      // program = (Program) parser.parse().value;
-      program = (Program) parser.debug_parse().value;  // parse
+      program = (Program) parser.parse().value;
+      // program = (Program) parser.debug_parse().value;  // parse
       //The above line of code will output current state and what token is being processed
     }    
     catch (Exception e) { 

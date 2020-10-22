@@ -1,5 +1,22 @@
 class Memberdecls implements Token
 {
+    Fieldsmethods fieldsmethods;
+
+    public Memberdecls(Fieldsmethods fm)
+    {
+        fieldsmethods = fm;
+    }
+
+    public String toString(int t)
+    {
+        String ret = "";
+
+        if(fieldsmethods != null) {
+            ret += fieldsmethods.toString(t);
+        }
+        return ret;
+    }
+    /*
     Fielddecls fielddecls;
     Methoddecls methoddecls;
     Fielddecl fielddecl;
@@ -37,4 +54,5 @@ class Memberdecls implements Token
         }
         return ret;
     }
+    */
 }
