@@ -106,19 +106,6 @@ fieldsmethods ::=
 		{: RESULT = new Fieldsmethods(); :}
 		;
 
-/*
-memberdecls ::=
-	    fielddecls:fds methoddecls:md
-	    {: RESULT = new Memberdecls(fds, md); :}
-		|
-		fielddecl:fd methoddecls:md
-		{: RESULT = new Memberdecls(fd, md); :}
-		|
-		methoddecls:md
-		{: RESULT = new Memberdecls(md); :}
-	    ;
-*/
-
 fielddecls ::=
 	   	fielddecl:fd fielddecls:fds
 	   	{: RESULT = new Fielddecls(fd, fds); :}
