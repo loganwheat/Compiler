@@ -15,7 +15,9 @@ Once the above has been confirmed, you can run the code using the Makefile.
 
 "$make" should work
 
-"$make run" also works
+"$make all" compiles Scanner.java and parser.java
+
+"$make run" compiles all the code and runs all of the test files
 
 The above two commands will run tests 1-5 and output the results to both <testname>-output.txt as well as console.
 
