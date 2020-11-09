@@ -26,4 +26,12 @@ class Stmts extends Token
         }
         return ret;
     }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        if (exists) {
+            stmt.typeCheck(s);
+            stmts.typeCheck(s);
+        }
+    }
 }

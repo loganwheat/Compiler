@@ -26,4 +26,14 @@ class Fielddecls extends Token
 
         return ret;
     }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        if (fielddecls == null && fielddecl != null) {
+            fielddecl.typeCheck(s);
+        } else if(fielddecl != null && fielddecls != null) {
+            fielddecl.typeCheck(s);
+            fielddecls.typeCheck(s);
+        }
+    }
 }

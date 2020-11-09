@@ -13,6 +13,19 @@ class Name extends Token
         id = i;
         expr = null;
     }
+    public String nameId()
+    {
+        return id;
+    }
+    public String nameType()
+    {
+        String nType = "";
+        if(expr != null) {
+            return expr.exprType;
+        } else {
+            return nType;
+        }
+    }
 
     public String toString(int t)
     {

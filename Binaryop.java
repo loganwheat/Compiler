@@ -10,6 +10,7 @@ class Binaryop extends Token
         r = rhs;
     }
 
+
     public String toString(int t)
     {
         return "(" + l.toString(t) + " " + bo + " " + r.toString(t) + ")";

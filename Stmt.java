@@ -158,4 +158,9 @@ class Stmt extends Token
         }
         return ret;
     }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        
+    }
 }

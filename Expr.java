@@ -48,20 +48,7 @@ class Expr extends Token
         id = i;
         args = a;
     }
-/*
-    public Expr(int code, int i)
-    {
-        statuscode = code;
-        intlit = i;
-    }
-*/
-/*
-    public Expr(int code, double fl)
-    {
-        statuscode = code;
-        floatlit = fl;
-    }
-*/
+
     public Expr(int code, boolean tf)
     {
         statuscode = code;
@@ -95,6 +82,41 @@ class Expr extends Token
         expr3 = e3;
     }
 
+    public String getType() throws TypeCheckException
+    {
+        String eType = "";
+
+        if(statuscode == 1 && name != null) {
+            eType += name.nameType();
+        } else if(statuscode == 4) {
+            eType += "int";
+        } else if(statuscode == 5) {
+            eType += "char";
+        } else if(statuscode == 6) {
+            eType += "string";
+        } else if(statuscode == 7) {
+            eType += "float";
+        } else if(statuscode == 8) {
+            eType += "bool";
+        } else if(statuscode == 9 || statuscode == 10 || statuscode == 11 || statuscode == 12) {
+            return expr.getType();
+        } else if(statuscode == 13) {
+
+            // confusion
+
+        } else if(statuscode == 14) {
+            eType += "bool";
+        } else if(statuscode == 15) {
+            if(!(expr.getType().equals("bool"))) {
+                throw new TypeCheckException("Error: " + expr.toString(0) + " must be of type bool");
+            } else if (!(expr2.getType().equals(expr3.getType()))) {
+                throw new TypeCheckException("Error: " + expr2.toString(0) + " must have equal type to " + expr3.toString(0));
+            } else {
+                return expr2.getType();
+            }
+        }
+    }
+
     public boolean isFunction()
     {
         boolean isFunc = false;
@@ -103,6 +125,8 @@ class Expr extends Token
         }
         return isFunc;
     }
+
+
 
     public String toString(int t)
     {

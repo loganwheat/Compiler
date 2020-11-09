@@ -26,4 +26,15 @@ class ArgdeclList extends Token
         }
         return ret;
     }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        if (aList != null && argdecl != null) {
+            argdecl.typeCheck(s);
+            aList.typeCheck(s);
+        }
+        else if (argdecl != null){
+            argdecl.typeCheck(s);
+        }
+    }
 }
