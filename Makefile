@@ -13,6 +13,7 @@ default: run
 	$(JAVAC) -cp $(CP) $*.java
 
 FILE=	Scanner.java parser.java sym.java ParserTest.java \
+		TypeCheckerTest.java \
 		Program.java Memberdecls.java Fieldsmethods.java Fielddecls.java Methoddecls.java \
 		Fielddecl.java Optionalexpr.java Methoddecl.java Optionalsemi.java \
 		Type.java Argdecls.java ArgdeclList.java Argdecl.java Stmts.java Stmt.java \
