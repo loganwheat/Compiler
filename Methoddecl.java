@@ -53,6 +53,11 @@ class Methoddecl extends Token
         else if (type != null && argdecls != null && fielddecls != null && stmts != null) {
             ft = new FullType(type.toString(0), false, false, true);
         }
+
+        argdecls.typeCheck(methodScope);
+        fielddecls.typeCheck(methodScope);
+        stmts.typeCheck(methodScope);
+
         if(methodScope.validKeyInScope(id, methodScope)) {
             methodScope.addToHash(id, ft);
         } else {
