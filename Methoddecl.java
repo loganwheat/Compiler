@@ -44,6 +44,19 @@ class Methoddecl extends Token
 
     public void typeCheck(Scope s) throws TypeCheckException
     {
+        FullType ft = null;
         methodScope = new Scope(s);
+
+        if (isVoid && id != null && argdecls != null && fielddecls != null && stmts != null) {
+            ft = new FullType("void", false, false, true);
+        }
+        else if (type != null && argdecls != null && fielddecls != null && stmts != null) {
+            ft = new FullType(type.toString(0), false, false, true);
+        }
+        if(methodScope.validKeyInScope(id, methodScope)) {
+            methodScope.addToHash(id, ft);
+        } else {
+            throw new TypeCheckException("Error: " + id + " can't be redeclared");
+        }
     }
 }

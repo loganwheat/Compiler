@@ -6,4 +6,4 @@ Program:
 		{
 		}
 	}
-Type checking complete!
+Error: y can't be redeclared
