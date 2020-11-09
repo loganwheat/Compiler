@@ -1,0 +1,7 @@
+Program:
+	class x
+	{
+		int y;
+		char y;
+	}
+Error: y can't be redeclared

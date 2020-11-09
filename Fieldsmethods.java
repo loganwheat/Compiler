@@ -48,6 +48,17 @@ class Fieldsmethods extends Token
 
     public void typeCheck(Scope s) throws TypeCheckException
     {
-        methoddecl.typeCheck(s);
+        if (methoddecl != null) {
+            methoddecl.typeCheck(s);
+            if (methoddecls != null) {
+                methoddecls.typeCheck(s);
+            }
+        }
+        else if (fielddecl != null) {
+            fielddecl.typeCheck(s);
+            if (fieldsmethods != null) {
+                fieldsmethods.typeCheck(s);
+            }
+        }
     }
 }

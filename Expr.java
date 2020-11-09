@@ -95,6 +95,15 @@ class Expr extends Token
         expr3 = e3;
     }
 
+    public boolean isFunction()
+    {
+        boolean isFunc = false;
+        if(statuscode == 2 || statuscode == 3) {
+            isFunc = true;
+        }
+        return isFunc;
+    }
+
     public String toString(int t)
     {
         String ret = "";

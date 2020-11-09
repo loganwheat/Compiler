@@ -1,0 +1,10 @@
+Program:
+	class x
+	{
+		void main () 
+		{
+			bool x; 
+			x--;
+		}
+	}
+Type checking complete!

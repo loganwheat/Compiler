@@ -12,7 +12,7 @@ class FullType {
         func = fu;
     }
 
-    boolean getType()
+    String getType()
     {
         return type;
     }

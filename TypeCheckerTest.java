@@ -32,7 +32,7 @@ public class TypeCheckerTest{
       e.printStackTrace(); 
     }
     
-    System.out.print(program.toString(0));
+    System.out.print(program.toString(1));
     //Now test type checking
     try
       {

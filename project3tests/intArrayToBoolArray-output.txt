@@ -1,0 +1,12 @@
+Program:
+	class x
+	{
+		intmain () 
+		{
+			int x [1] ; 
+			bool y [1] ; 
+			y = x;
+			return 0;
+		}
+	}
+Type checking complete!

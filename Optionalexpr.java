@@ -12,6 +12,14 @@ class Optionalexpr extends Token
     {
         exists = false;
     }
+    public boolean isFunction()
+    {
+        if(exists == true){
+            return expr.isFunction();
+        } else {
+            return false;
+        }
+    }
 
     public String toString(int t)
     {

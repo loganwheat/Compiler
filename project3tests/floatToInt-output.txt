@@ -1,0 +1,9 @@
+Program:
+	class x
+	{
+		void main () 
+		{
+			int i = 1.0; 
+		}
+	}
+Type checking complete!

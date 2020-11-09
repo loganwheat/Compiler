@@ -22,27 +22,95 @@ FILE=	Scanner.java parser.java sym.java ParserTest.java \
 
 dump: parserD.java $(FILE:java=class)
 
-run: test1DE.txt test2DE.txt test3.txt test4.txt test5.txt
+run: badDec.as badInc.as badNegation.as badString.as badTernaryCond.as badTernaryTypes.as \
+	boolToFloat.as boolToInt.as callNonExistFunc.as charToFloat.as charToInt.as \
+	floatToInt.as incompatBinary.as intArrayToBoolArray.as \
+	noReturn.as reassignFinal.as redefMethod.as redefVar.as redefVarAsMethod.as \
+	returnTypeBad.as
 
-test1DE.txt: all
-	$(JAVA) -cp $(CP) ParserTest test1DE.txt > test1DE-output.txt
-	cat -n test1DE-output.txt
+badDec.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/badDec.as > project3tests/badDec-output.txt
+	cat -n project3tests/badDec-output.txt
 
-test2DE.txt: all
-	$(JAVA) -cp $(CP) ParserTest test2DE.txt > test2DE-output.txt
-	cat -n test2DE-output.txt
+badInc.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/badInc.as > project3tests/badInc-output.txt
+	cat -n project3tests/badInc-output.txt
 
-test3.txt: all
-	$(JAVA) -cp $(CP) ParserTest test3.txt > test3-output.txt
-	cat -n test3-output.txt
+badNegation.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/badNegation.as > project3tests/badNegation-output.txt
+	cat -n project3tests/badNegation-output.txt
 
-test4.txt: all
-	$(JAVA) -cp $(CP) ParserTest test4.txt > test4-output.txt
-	cat -n test4-output.txt
+badString.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/badString.as > project3tests/badString-output.txt
+	cat -n project3tests/badString-output.txt
 
-test5.txt: all
-	$(JAVA) -cp $(CP) ParserTest test5.txt > test5-output.txt
-	cat -n test5-output.txt
+badTernaryCond.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/badTernaryCond.as > project3tests/badTernaryCond-output.txt
+	cat -n project3tests/badTernaryCond-output.txt
+
+badTernaryTypes.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/badTernaryTypes.as > project3tests/badTernaryTypes-output.txt
+	cat -n project3tests/badTernaryTypes-output.txt
+
+boolToFloat.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/boolToFloat.as > project3tests/boolToFloat-output.txt
+	cat -n project3tests/boolToFloat-output.txt
+
+boolToInt.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/boolToInt.as > project3tests/boolToInt-output.txt
+	cat -n project3tests/boolToInt-output.txt
+
+callNonExistFunc.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/callNonExistFunc.as > project3tests/callNonExistFunc-output.txt
+	cat -n project3tests/callNonExistFunc-output.txt
+
+charToFloat.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/charToFloat.as > project3tests/charToFloat-output.txt
+	cat -n project3tests/charToFloat-output.txt
+
+charToInt.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/charToInt.as > project3tests/charToInt-output.txt
+	cat -n project3tests/charToInt-output.txt
+
+floatToInt.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/floatToInt.as > project3tests/floatToInt-output.txt
+	cat -n project3tests/floatToInt-output.txt
+
+fullValidProgramDE.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/fullValidProgramDE.as > project3tests/fullValidProgramDE-output.txt
+	cat -n project3tests/fullValidProgramDE-output.txt
+
+incompatBinary.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/incompatBinary.as > project3tests/incompatBinary-output.txt
+	cat -n project3tests/incompatBinary-output.txt
+
+intArrayToBoolArray.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/intArrayToBoolArray.as > project3tests/intArrayToBoolArray-output.txt
+	cat -n project3tests/intArrayToBoolArray-output.txt
+
+noReturn.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/noReturn.as > project3tests/noReturn-output.txt
+	cat -n project3tests/noReturn-output.txt
+
+reassignFinal.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/reassignFinal.as > project3tests/reassignFinal-output.txt
+	cat -n project3tests/reassignFinal-output.txt
+
+redefMethod.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/redefMethod.as > project3tests/redefMethod-output.txt
+	cat -n project3tests/redefMethod-output.txt
+
+redefVar.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/redefVar.as > project3tests/redefVar-output.txt
+	cat -n project3tests/redefVar-output.txt
+
+redefVarAsMethod.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/redefVarAsMethod.as > project3tests/redefVarAsMethod-output.txt
+	cat -n project3tests/redefVarAsMethod-output.txt
+
+returnTypeBad.as: all
+	$(JAVA) -cp $(CP) TypeCheckerTest project3tests/returnTypeBad.as > project3tests/returnTypeBad-output.txt
+	cat -n project3tests/returnTypeBad-output.txt
 
 all: Scanner.java parser.java $(FILE:java=class)
 

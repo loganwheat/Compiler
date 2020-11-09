@@ -25,4 +25,12 @@ class Methoddecls extends Token
             return "";
         }
     }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        if(exists && methoddecl != null && methoddecls != null) {
+            methoddecls.typeCheck(s);
+            methoddecl.typeCheck(s);
+        }
+    }
 }

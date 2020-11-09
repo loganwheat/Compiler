@@ -2,6 +2,7 @@ class Fielddecl extends Token
 {
     boolean isFinal = false;
     boolean isIntLit = false;
+    boolean isFunction;
     Type type;
     String id;
     Optionalexpr optionalexpr;
@@ -43,5 +44,31 @@ class Fielddecl extends Token
             }
         }
         return ret;
+    }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        FullType ft = null;
+        if (isIntLit == true && type != null && id != null)
+        {
+            // need to validate if intlit
+            ft = new FullType(type.toString(0), false, true, false);
+        }
+        else
+        {
+            if (isFinal == true && type != null && id != null)
+            {
+                ft = new FullType(type.toString(0), true, false, optionalexpr.isFunction());
+            }
+            else if(type != null && id != null)
+            {
+                ft = new FullType(type.toString(0), false, false, optionalexpr.isFunction());
+            }
+        }
+        if(s.validKeyInScope(id, s)) {
+            s.addToHash(id, ft);
+        } else {
+            throw new TypeCheckException("Error: " + id + " can't be redeclared");
+        }
     }
 }

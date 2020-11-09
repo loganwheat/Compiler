@@ -1,0 +1,9 @@
+Program:
+	class x
+	{
+		intmain () 
+		{
+			int y = 'c'; 
+		}
+	}
+Type checking complete!

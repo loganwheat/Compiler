@@ -7,6 +7,7 @@ class Methoddecl extends Token
     Stmts stmts;
     Optionalsemi optionalsemi;
     boolean isVoid = false;
+    Scope methodScope;
 
     public Methoddecl(Type t, String i, Argdecls a, Fielddecls fds, Stmts s, Optionalsemi os)
     {
@@ -39,5 +40,10 @@ class Methoddecl extends Token
         }
 
         return ret;
+    }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        methodScope = new Scope(s);
     }
 }

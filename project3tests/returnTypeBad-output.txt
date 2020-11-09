@@ -1,0 +1,9 @@
+Program:
+	class x
+	{
+		intfoo () 
+		{
+			return 1.0;
+		}
+	}
+Type checking complete!

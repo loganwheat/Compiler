@@ -1,0 +1,8 @@
+Program:
+	class x
+	{
+		intmain () 
+		{
+		}
+	}
+Type checking complete!

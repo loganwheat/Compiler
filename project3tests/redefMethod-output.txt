@@ -1,0 +1,13 @@
+Program:
+	class x
+	{
+		void foo () 
+		{
+		}
+
+		intfoo (intx) 
+		{
+			return 1;
+		} 
+	}
+Type checking complete!
