@@ -36,10 +36,10 @@ public class TypeCheckerTest{
     //Now test type checking
     try
       {
-        program.typeCheck();
+        program.typeCheck(program.getScope());
         System.out.println("Type checking complete!");
       }
-    catch (ExampleException e)
+    catch (TypeCheckException e)
       {
         System.out.println(e.toString());
       }

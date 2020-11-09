@@ -16,4 +16,9 @@ class Memberdecls extends Token
         }
         return ret;
     }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        fieldsmethods.typeCheck(s);
+    }
 }

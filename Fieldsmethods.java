@@ -45,4 +45,9 @@ class Fieldsmethods extends Token
         }
         return ret;
     }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        methoddecl.typeCheck(s);
+    }
 }
