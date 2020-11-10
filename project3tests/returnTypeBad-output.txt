@@ -6,4 +6,4 @@ Program:
 			return 1.0;
 		}
 	}
-Type checking complete!
+Error: function return type must be int

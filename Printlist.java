@@ -1,24 +1,24 @@
 class Printlist extends Token
 {
     Expr expr;
-    Readlist readlist;
+    Printlist printlist;
 
-    public Printlist(Expr e, Readlist rl)
+    public Printlist(Expr e, Printlist pl)
     {
         expr = e;
-        readlist = rl;
+        printlist = pl;
     }
     public Printlist(Expr e)
     {
         expr = e;
-        readlist = null;
+        printlist = null;
     }
 
     public String toString(int t)
     {
         String ret = "";
-        if (expr != null && readlist != null) {
-            ret = expr.toString(t) + " , " + readlist.toString(t);
+        if (expr != null && printlist != null) {
+            ret = expr.toString(t) + " , " + printlist.toString(t);
         }
         else if (expr != null) {
             ret = expr.toString(t);
@@ -28,13 +28,18 @@ class Printlist extends Token
 
     public void typeCheck(Scope s) throws TypeCheckException
     {
-        if (expr != null && readlist != null) {
+        if (expr != null && printlist != null) {
             expr.typeCheck(s);
-            readlist.typeCheck(s);
+            printlist.typeCheck(s);
         }
         else if (expr != null) {
             expr.typeCheck(s);
         }
-        
+        if(s.keyIsArray(expr.getId(), s)) {
+            throw new TypeCheckException("Error: Print does not work on an array");
+        }
+        if(s.getTypeFromKey(expr.getId(), s).equals("void")) {
+            throw new TypeCheckException("Error: Print does not work on void type");
+        }
     }
 }

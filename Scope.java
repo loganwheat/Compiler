@@ -4,23 +4,35 @@ class Scope {
     private HashMap<String, FullType> symbolTable;
     private Scope parentScope;
     private String methodReturnType;
+    private int numOfArgs;
 
     public Scope() {
         this.parentScope = null;
         this.symbolTable = new HashMap<String, FullType>();
         this.methodReturnType = null;
+        this.numOfArgs = 0;
     }
 
     public Scope(Scope s) {
         this.parentScope = s;
         this.symbolTable = new HashMap<String, FullType>();
         this.methodReturnType = null;
+        this.numOfArgs = 0;
     }
 
     public Scope(Scope s, String mrt) {
         this.parentScope = s;
         this.symbolTable = new HashMap<String, FullType>();
         this.methodReturnType = mrt;
+        this.numOfArgs = 0; // will add one by one
+    }
+
+    public void addArg(Scope s) {
+        s.numOfArgs++;
+    }
+
+    public int getNumOfArgs(Scope s) {
+        return numOfArgs;
     }
 
     public String getReturnType(Scope s) {

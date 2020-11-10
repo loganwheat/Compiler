@@ -292,18 +292,6 @@ standardStmt ::=
 		{: RESULT = new Stmt(13, fds, s, os); :}
 		;
 
-/*
-ifEnd ::=
-		ELSE stmt:s FI
-		{: RESULT = new IfEnd(s); :}
-		|
-		FI
-		{: RESULT = new IfEnd(); :}
-		;
-*/
-
-
-
 name ::=
 		ID:i
 		{: RESULT = new Name(i); :}
@@ -321,16 +309,16 @@ args ::=
 		;
 
 readlist ::=
-		name:n COMMA args:a
-		{: RESULT = new Readlist(n, a); :}
+		name:n COMMA readlist:rl
+		{: RESULT = new Readlist(n, rl); :}
 		|
 		name:n
 		{: RESULT = new Readlist(n); :}
 		;
 
 printlist ::=
-		expr:e COMMA readlist:rl
-		{: RESULT = new Printlist(e, rl); :}
+		expr:e COMMA printlist:pl
+		{: RESULT = new Printlist(e, pl); :}
 		|
 		expr:e
 		{: RESULT = new Printlist(e); :}

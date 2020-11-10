@@ -188,34 +188,61 @@ class Stmt extends Token
                 printlinelist.typeCheck(s);
                 break;
             case 7:
-                //ret += id + " ();";
+                if(!(s.keyIsFunction(id, s))) {
+                    throw new TypeCheckException("Error: Invalid call to function " + id);
+                }
                 break;
             case 8:
-                //ret += id + " (" + args.toString(t) + ");";
+                if(!(s.keyIsFunction(id, s))) {
+                    throw new TypeCheckException("Error: Invalid call to function " + id);
+                }
+                args.typeCheck(s);
                 break;
             case 9:
-                //ret += "return;";
+                if(!(s.getReturnType(s).equals("void"))) {
+                    throw new TypeCheckException("Error: function return type must be void");
+                }
                 break;
             case 10:
-                //ret += "return " + expr.toString(t) + ";";
+                if(!(s.getReturnType(s).equals(expr.getType(s)))) {
+                    throw new TypeCheckException("Error: function return type must be " + s.getReturnType(s));
+                }
+                expr.typeCheck(s);
                 break;
             case 11:
-                //ret += name.toString(t) + "++;";
+                if(s.keyIsFinal(name.nameId(), s)) {
+                    throw new TypeCheckException("Error: final type " + name.nameId() + " can not be incremented");
+                } else if (!(name.nameType(s).equals("int") || name.nameType(s).equals("float"))) {
+                    throw new TypeCheckException("Error: invalid type " + name.nameId() + " can not be incremented");
+                }
+                name.typeCheck(s);
                 break;
             case 12:
-                ///ret += name.toString(t) + "--;";
+                if(s.keyIsFinal(name.nameId(), s)) {
+                    throw new TypeCheckException("Error: final type " + name.nameId() + " can not be decremented");
+                } else if (!(name.nameType(s).equals("int") || name.nameType(s).equals("float"))) {
+                    throw new TypeCheckException("Error: invalid type " + name.nameId() + " can not be decremented");
+                }
+                name.typeCheck(s);
                 break;
             case 13:
-                //ret += "{ " + fielddecls.toString(t+1) + stmts.toString(t+1) + getTabs(t) + "} " + optionalsemi.toString(t);
+                Scope childScope = new Scope(s);
+                fielddecls.typeCheck(childScope);
+                stmts.typeCheck(childScope);
                 break;
             case 14:
-                //ret += "if (" + expr.toString(t) + ") " + smatch.toString(t+1) + getTabs(t) + "else " + smatch2.toString(t+1);
+                expr.typeCheck(s);
+                smatch.typeCheck(s);
+                smatch2.typeCheck(s);
                 break;
             case 15:
-                //ret += "if (" + expr.toString(t) + ") " + stmt.toString(t+1);
+                expr.typeCheck(s);
+                stmt.typeCheck(s);
                 break;
             case 16:
-                //ret += "if (" + expr.toString(t) + ") " + smatch.toString(t+1) + getTabs(t) + "else " + sunmatch.toString(t+1);
+                expr.typeCheck(s);
+                smatch.typeCheck(s);
+                sunmatch.typeCheck(s);
                 break;
             default:
                 throw new TypeCheckException("Error in Stmt");

@@ -6,4 +6,4 @@ Program:
 			nonExistFoo ();
 		}
 	}
-Type checking complete!
+Error: Invalid call to function nonExistFoo

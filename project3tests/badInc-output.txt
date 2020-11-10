@@ -7,4 +7,4 @@ Program:
 			y++;
 		}
 	}
-Type checking complete!
+Error: invalid type y can not be incremented

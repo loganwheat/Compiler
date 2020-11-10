@@ -24,7 +24,7 @@ dump: parserD.java $(FILE:java=class)
 
 run: badDec.as badInc.as badNegation.as badString.as badTernaryCond.as badTernaryTypes.as \
 	boolToFloat.as boolToInt.as callNonExistFunc.as charToFloat.as charToInt.as \
-	floatToInt.as incompatBinary.as intArrayToBoolArray.as \
+	floatToInt.as fullValidProgramDE.as incompatBinary.as intArrayToBoolArray.as \
 	noReturn.as reassignFinal.as redefMethod.as redefVar.as redefVarAsMethod.as \
 	returnTypeBad.as
 

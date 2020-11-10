@@ -1,24 +1,24 @@
 class Readlist extends Token
 {
     Name name;
-    Args args;
+    Readlist readlist;
 
-    public Readlist(Name n, Args a)
+    public Readlist(Name n, Readlist rl)
     {
         name = n;
-        args = a;
+        readlist = rl;
     }
     public Readlist(Name n)
     {
         name = n;
-        args = null;
+        readlist = null;
     }
 
     public String toString(int t)
     {
         String ret = "";
-        if(name != null && args != null) {
-            ret = name.toString(t) + " , " + args.toString(t);
+        if(name != null && readlist != null) {
+            ret = name.toString(t) + " , " + readlist.toString(t);
         }
         else if (name != null){
             ret = name.toString(t);
@@ -28,30 +28,21 @@ class Readlist extends Token
 
     public void typeCheck(Scope s) throws TypeCheckException
     {
-        if(name != null && args != null) {
-            if(s.keyIsFinal(name.nameId(), s) || s.keyIsFinal(args.exprId(), s)) {
-                throw new TypeCheckException("Error: Read does not work on final");
-            }
-            if(s.keyIsArray(name.nameId(), s) || s.keyIsArray(args.exprId(), s)) {
-                throw new TypeCheckException("Error: Read does not work on an array");
-            }
-            if(s.keyIsFunction(name.nameId(), s) || s.keyIsFunction(args.exprId(), s)) {
-                throw new TypeCheckException("Error: Read does not work on a function");
-            }
+        if(name != null && readlist != null) {
+            
             name.typeCheck(s);
-            args.typeCheck(s);
         }
         else if (name != null){
-            if(s.keyIsFinal(name.nameId(), s)) {
-                throw new TypeCheckException("Error: Read does not work on final");
-            }
-            if(s.keyIsArray(name.nameId(), s)) {
-                throw new TypeCheckException("Error: Read does not work on an array");
-            }
-            if(s.keyIsFunction(name.nameId(), s)) {
-                throw new TypeCheckException("Error: Read does not work on a function");
-            }
             name.typeCheck(s);
+        }
+        if(s.keyIsFinal(name.nameId(), s)) {
+            throw new TypeCheckException("Error: Read does not work on final");
+        }
+        if(s.keyIsArray(name.nameId(), s)) {
+            throw new TypeCheckException("Error: Read does not work on an array");
+        }
+        if(s.keyIsFunction(name.nameId(), s)) {
+            throw new TypeCheckException("Error: Read does not work on a function");
         }
     }
 }

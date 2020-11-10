@@ -25,6 +25,19 @@ class Argdecl extends Token
 
     public void typeCheck(Scope s) throws TypeCheckException
     {
+        s.addArg(s); // keep track of total number of args
         FullType ft = null;
+        if(containsBrackets && type != null && id != null) {
+            ft = new FullType(type.toString(0), false, true, false);
+        }
+        else if (type != null && id != null) {
+            ft = new FullType(type.toString(0), false, false, false);
+        }
+
+        if(s.validKeyInScope(id, s)) {
+            s.addToHash(id, ft);
+        } else {
+            throw new TypeCheckException("Error: " + id + " can't be redeclared");
+        }
     }
 }
