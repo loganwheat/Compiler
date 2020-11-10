@@ -9,4 +9,4 @@ Program:
 			return 0;
 		}
 	}
-Type checking complete!
+Error: y is incompatible type for ||

@@ -101,9 +101,7 @@ class Expr extends Token
         } else if(statuscode == 9 || statuscode == 10 || statuscode == 11 || statuscode == 12) {
             return expr.getType(s);
         } else if(statuscode == 13) {
-
             // confusion
-
         } else if(statuscode == 14) {
             eType += "bool";
         } else if(statuscode == 15) {
@@ -231,6 +229,77 @@ class Expr extends Token
 
     public void typeCheck(Scope s) throws TypeCheckException
     {
-        
+        switch(statuscode) {
+            case 1:
+                if(name != null) {
+                    name.typeCheck(s);
+                }
+                break;
+            case 2:
+                if(!(s.keyIsFunction(id, s))) {
+                    throw new TypeCheckException("Error: Invalid call to function " + id);
+                }
+                break;
+            case 3:
+                if(!(s.keyIsFunction(id, s))) {
+                    throw new TypeCheckException("Error: Invalid call to function " + id);
+                }
+                args.typeCheck(s);
+                break;
+            case 4:
+                // handled in getType
+                break;
+            case 5:
+                // handled in getType
+                break;
+            case 6:
+                // handled in getType
+                break;
+            case 7:
+                // handled in getType
+                break;
+            case 8:
+                // handled in getType
+                break;
+            case 9:
+                expr.typeCheck(s);
+                break;
+            case 10:
+                if(!(expr.getType(s).equals("bool"))) {
+                    throw new TypeCheckException("Error: " + expr.getId() + " not a valid type (bool) to use ~");
+                }
+                expr.typeCheck(s);
+                break;
+            case 11:
+                if(!(expr.getType(s).equals("int") || expr.getType(s).equals("float"))) {
+                    throw new TypeCheckException("Error: " + expr.getId() + " not a valid type (int or float) to use -");
+                }
+                expr.typeCheck(s);
+                break;
+            case 12:
+                if(!(expr.getType(s).equals("int") || expr.getType(s).equals("float"))) {
+                    throw new TypeCheckException("Error: " + expr.getId() + " not a valid type (int or float) to use +");
+                }
+                expr.typeCheck(s);
+                break;
+            case 13:
+                // will come back to it
+                break;
+            case 14:
+                binaryop.typeCheck(s);
+                break;
+            case 15:
+                if(!(expr.getType(s).equals("bool"))) {
+                    throw new TypeCheckException("Error: " + expr.toString(0) + " must be of type bool");
+                } else if (!(expr2.getType(s).equals(expr3.getType(s)))) {
+                    throw new TypeCheckException("Error: " + expr2.toString(0) + " must have equal type to " + expr3.toString(0));
+                }
+                expr.typeCheck(s);
+                expr2.typeCheck(s);
+                expr3.typeCheck(s);
+                break;
+            default:
+                throw new TypeCheckException("ERROR in Expr.java");
+        }
     }
 }
