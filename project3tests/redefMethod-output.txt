@@ -5,9 +5,9 @@ Program:
 		{
 		}
 
-		intfoo (intx) 
+		int foo (intx) 
 		{
 			return 1;
 		} 
 	}
-Type checking complete!
+Error: foo can't be redeclared

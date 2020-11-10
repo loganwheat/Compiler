@@ -17,15 +17,6 @@ class Stmt extends Token
     Stmt smatch2;
     Stmt sunmatch;
 
-    /*
-    public Stmt(int code, Expr e, Stmt s, IfEnd ie)
-    {
-        statuscode = code;
-        expr = e;
-        stmt = s;
-        ifEnd = ie;
-    }
-    */
     public Stmt(int code, Expr e, Stmt s)
     {
         statuscode = code;
@@ -100,6 +91,8 @@ class Stmt extends Token
         }
     }
 
+
+
     public String toString(int t)
     {
         String ret = getTabs(t);
@@ -161,6 +154,69 @@ class Stmt extends Token
 
     public void typeCheck(Scope s) throws TypeCheckException
     {
-        
+        switch(statuscode) {
+            case 1:
+                if(!(expr.getType().equals("bool"))) {
+                    throw new TypeCheckException("Error: while() condition " + expr.toString(0) + " must be of type bool");
+                }
+                expr.typeCheck(s);
+                stmt.typeCheck(s);
+                break;
+            case 2:
+                if(!(expr.getType().equals("bool"))) {
+                    throw new TypeCheckException("Error: while() condition " + expr.toString(0) + " must be of type bool");
+                }
+                expr.typeCheck(s);
+                stmt.typeCheck(s);
+                break;
+            case 3:
+                if(!(name.nameType().equals(expr.getType()))) {
+                    throw new TypeCheckException("Error: " + name.nameId() + " must be of equal type to " + expr.toString(0));
+                }
+                name.typeCheck(s);
+                expr.typeCheck(s);
+                break;
+            case 4:
+                readlist.typeCheck(s);
+                break;
+            case 5:
+                //ret += "print (" + printlist.toString(t) + ");";
+                break;
+            case 6:
+                //ret += "printline (" + printlinelist.toString(t) + ");";
+                break;
+            case 7:
+                //ret += id + " ();";
+                break;
+            case 8:
+                //ret += id + " (" + args.toString(t) + ");";
+                break;
+            case 9:
+                //ret += "return;";
+                break;
+            case 10:
+                //ret += "return " + expr.toString(t) + ";";
+                break;
+            case 11:
+                //ret += name.toString(t) + "++;";
+                break;
+            case 12:
+                ///ret += name.toString(t) + "--;";
+                break;
+            case 13:
+                //ret += "{ " + fielddecls.toString(t+1) + stmts.toString(t+1) + getTabs(t) + "} " + optionalsemi.toString(t);
+                break;
+            case 14:
+                //ret += "if (" + expr.toString(t) + ") " + smatch.toString(t+1) + getTabs(t) + "else " + smatch2.toString(t+1);
+                break;
+            case 15:
+                //ret += "if (" + expr.toString(t) + ") " + stmt.toString(t+1);
+                break;
+            case 16:
+                //ret += "if (" + expr.toString(t) + ") " + smatch.toString(t+1) + getTabs(t) + "else " + sunmatch.toString(t+1);
+                break;
+            default:
+                throw new TypeCheckException("Error in Stmt");
+            }
     }
 }

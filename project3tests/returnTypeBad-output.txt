@@ -1,7 +1,7 @@
 Program:
 	class x
 	{
-		intfoo () 
+		int foo () 
 		{
 			return 1.0;
 		}

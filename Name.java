@@ -17,14 +17,18 @@ class Name extends Token
     {
         return id;
     }
-    public String nameType()
+    public String nameType() throws TypeCheckException
     {
         String nType = "";
-        if(expr != null) {
-            return expr.exprType;
-        } else {
-            return nType;
-        }
+
+        try {
+            if(expr != null) {
+                nType += expr.getType();
+            } else {
+                return nType;
+            }
+        } catch (TypeCheckException e) {}
+        return nType;
     }
 
     public String toString(int t)
@@ -37,5 +41,12 @@ class Name extends Token
             ret = id;
         }
         return ret;
+    }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        if(expr != null){
+            expr.typeCheck(s);
+        }
     }
 }

@@ -7,4 +7,4 @@ Program:
 			y = 2;
 		}
 	}
-Type checking complete!
+Error:  y must be of equal type to 2

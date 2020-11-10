@@ -25,6 +25,6 @@ class Argdecl extends Token
 
     public void typeCheck(Scope s) throws TypeCheckException
     {
-        
+        FullType ft = null;
     }
 }

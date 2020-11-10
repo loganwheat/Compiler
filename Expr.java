@@ -115,6 +115,23 @@ class Expr extends Token
                 return expr2.getType();
             }
         }
+
+        return eType;
+    }
+
+    public String getId() {
+        if(id != null) {
+            return id;
+        }
+        else if(name != null) {
+            return name.nameId();
+        }
+        else if(expr != null) {
+            return expr.getId();
+        }
+        else {
+            return "";
+        }
     }
 
     public boolean isFunction()
@@ -125,8 +142,6 @@ class Expr extends Token
         }
         return isFunc;
     }
-
-
 
     public String toString(int t)
     {
@@ -211,5 +226,10 @@ class Expr extends Token
                 ret += "ERROR in Expr.java";
         }
         return ret;
+    }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+
     }
 }

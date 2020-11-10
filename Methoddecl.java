@@ -36,7 +36,7 @@ class Methoddecl extends Token
             ret += "void " + id + " (" + argdecls.toString(t) + ") " + getTabs(t) + "{" + fielddecls.toString(t+1) + stmts.toString(t+1) + getTabs(t) + "}" + optionalsemi.toString(t);
         }
         else if (type != null && argdecls != null && fielddecls != null && stmts != null) {
-            ret += type.toString(t) + id + " (" + argdecls.toString(t) + ") " + getTabs(t) + "{" + fielddecls.toString(t+1) + stmts.toString(t+1) + getTabs(t) + "}" + optionalsemi.toString(t);
+            ret += type.toString(t) + " " + id + " (" + argdecls.toString(t) + ") " + getTabs(t) + "{" + fielddecls.toString(t+1) + stmts.toString(t+1) + getTabs(t) + "}" + optionalsemi.toString(t);
         }
 
         return ret;
@@ -45,21 +45,25 @@ class Methoddecl extends Token
     public void typeCheck(Scope s) throws TypeCheckException
     {
         FullType ft = null;
-        methodScope = new Scope(s);
+        String methodReturnType = "";
 
         if (isVoid && id != null && argdecls != null && fielddecls != null && stmts != null) {
             ft = new FullType("void", false, false, true);
+            methodReturnType += "void";
         }
         else if (type != null && argdecls != null && fielddecls != null && stmts != null) {
             ft = new FullType(type.toString(0), false, false, true);
+            methodReturnType += type.toString(0);
         }
+
+        methodScope = new Scope(s, methodReturnType); // create new scope, store return type
 
         argdecls.typeCheck(methodScope);
         fielddecls.typeCheck(methodScope);
         stmts.typeCheck(methodScope);
 
-        if(methodScope.validKeyInScope(id, methodScope)) {
-            methodScope.addToHash(id, ft);
+        if(s.validKeyInScope(id, s)) {
+            s.addToHash(id, ft);
         } else {
             throw new TypeCheckException("Error: " + id + " can't be redeclared");
         }

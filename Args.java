@@ -13,6 +13,14 @@ class Args extends Token
         expr = e;
         args = null;
     }
+    public String exprId()
+    {
+        if(expr != null) {
+            return expr.getId();
+        } else {
+            return "";
+        }
+    }
 
     public String toString(int t)
     {
@@ -24,5 +32,16 @@ class Args extends Token
             ret = expr.toString(t);
         }
         return ret;
+    }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        if(expr != null && args != null) {
+            expr.typeCheck(s);
+            args.typeCheck(s); 
+        }
+        else if (expr != null){
+            expr.typeCheck(s);
+        }
     }
 }

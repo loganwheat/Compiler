@@ -23,6 +23,7 @@ class Program extends Token
 
     public void typeCheck(Scope s) throws TypeCheckException
     {
-        memberdecls.typeCheck(s);
+        Scope memberdeclsScope = new Scope(s);
+        memberdecls.typeCheck(memberdeclsScope);
     }
 }
