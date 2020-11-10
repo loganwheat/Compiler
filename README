@@ -3,7 +3,8 @@ lmw170130
 CS4386.001
 Project Assignment 3
 
-Project with the dangling else solution. Run DE test files.
+Project with the dangling else solution. Run DE test files. Did not get to fully debug, some tests do not
+output the proper results. I promise I tried! I spent a long time debugging.
 
 All of the necessary source code is included in the included file.
 
