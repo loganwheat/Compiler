@@ -9,4 +9,4 @@ Program:
 			return 0;
 		}
 	}
-Type checking complete!
+Error: y must be of equal type to x

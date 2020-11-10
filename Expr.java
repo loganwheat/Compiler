@@ -82,13 +82,13 @@ class Expr extends Token
         expr3 = e3;
     }
 
-    public String getType() throws TypeCheckException
+    public String getType(Scope s) throws TypeCheckException
     {
         String eType = "";
 
         if(statuscode == 1 && name != null) {
-            eType += name.nameType();
-        } else if(statuscode == 4) {
+            eType += name.nameType(s);
+        } if(statuscode == 4) {
             eType += "int";
         } else if(statuscode == 5) {
             eType += "char";
@@ -99,7 +99,7 @@ class Expr extends Token
         } else if(statuscode == 8) {
             eType += "bool";
         } else if(statuscode == 9 || statuscode == 10 || statuscode == 11 || statuscode == 12) {
-            return expr.getType();
+            return expr.getType(s);
         } else if(statuscode == 13) {
 
             // confusion
@@ -107,17 +107,18 @@ class Expr extends Token
         } else if(statuscode == 14) {
             eType += "bool";
         } else if(statuscode == 15) {
-            if(!(expr.getType().equals("bool"))) {
+            if(!(expr.getType(s).equals("bool"))) {
                 throw new TypeCheckException("Error: " + expr.toString(0) + " must be of type bool");
-            } else if (!(expr2.getType().equals(expr3.getType()))) {
+            } else if (!(expr2.getType(s).equals(expr3.getType(s)))) {
                 throw new TypeCheckException("Error: " + expr2.toString(0) + " must have equal type to " + expr3.toString(0));
             } else {
-                return expr2.getType();
+                return expr2.getType(s);
             }
         }
 
         return eType;
     }
+
 
     public String getId() {
         if(id != null) {
@@ -230,6 +231,6 @@ class Expr extends Token
 
     public void typeCheck(Scope s) throws TypeCheckException
     {
-
+        
     }
 }

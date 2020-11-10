@@ -156,21 +156,21 @@ class Stmt extends Token
     {
         switch(statuscode) {
             case 1:
-                if(!(expr.getType().equals("bool"))) {
+                if(!(expr.getType(s).equals("bool"))) {
                     throw new TypeCheckException("Error: while() condition " + expr.toString(0) + " must be of type bool");
                 }
                 expr.typeCheck(s);
                 stmt.typeCheck(s);
                 break;
             case 2:
-                if(!(expr.getType().equals("bool"))) {
+                if(!(expr.getType(s).equals("bool"))) {
                     throw new TypeCheckException("Error: while() condition " + expr.toString(0) + " must be of type bool");
                 }
                 expr.typeCheck(s);
                 stmt.typeCheck(s);
                 break;
             case 3:
-                if(!(name.nameType().equals(expr.getType()))) {
+                if(!(name.nameType(s).equals(expr.getType(s)))) {
                     throw new TypeCheckException("Error: " + name.nameId() + " must be of equal type to " + expr.toString(0));
                 }
                 name.typeCheck(s);

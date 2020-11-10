@@ -85,6 +85,19 @@ class Scope {
         return isFunction;
     }
 
+    public String getTypeFromKey(String key, Scope sc) {
+        String kType = "unknown";
+        FullType ft;
+        if(sc.symbolTable.containsKey(key)) {
+            ft = sc.symbolTable.get(key);
+            return ft.getType();
+        }
+        if(sc.parentScope != null) {
+            return getTypeFromKey(key, sc.parentScope);
+        }
+        return kType;
+    }
+
     public void addToHash(String key, FullType ft) {
         this.symbolTable.put(key, ft);
     }

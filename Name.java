@@ -17,13 +17,15 @@ class Name extends Token
     {
         return id;
     }
-    public String nameType() throws TypeCheckException
+    public String nameType(Scope s) throws TypeCheckException
     {
         String nType = "";
 
         try {
-            if(expr != null) {
-                nType += expr.getType();
+            if(id != null) {
+                nType += s.getTypeFromKey(id, s);
+            } else if(expr != null) {
+                nType += expr.getType(s);
             } else {
                 return nType;
             }
