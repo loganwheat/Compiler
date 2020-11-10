@@ -7,4 +7,4 @@ Program:
 			y = 2;
 		}
 	}
-Type checking complete!
+Error: y is final and can not be reassigned to 2

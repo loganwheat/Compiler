@@ -165,13 +165,15 @@ class Stmt extends Token
             case 2:
                 if(!(expr.getType(s).equals("bool"))) {
                     throw new TypeCheckException("Error: while() condition " + expr.toString(0) + " must be of type bool");
-                }
+                } 
                 expr.typeCheck(s);
                 stmt.typeCheck(s);
                 break;
             case 3:
                 if(!(name.nameType(s).equals(expr.getType(s)))) {
                     throw new TypeCheckException("Error: " + name.nameId() + " must be of equal type to " + expr.toString(0));
+                } else if(s.keyIsFinal(name.nameId(), s)) {
+                    throw new TypeCheckException("Error: " + name.nameId() + " is final and can not be reassigned to " + expr.toString(0));
                 }
                 name.typeCheck(s);
                 expr.typeCheck(s);
@@ -180,10 +182,10 @@ class Stmt extends Token
                 readlist.typeCheck(s);
                 break;
             case 5:
-                //ret += "print (" + printlist.toString(t) + ");";
+                printlist.typeCheck(s);
                 break;
             case 6:
-                //ret += "printline (" + printlinelist.toString(t) + ");";
+                printlinelist.typeCheck(s);
                 break;
             case 7:
                 //ret += id + " ();";

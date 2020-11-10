@@ -24,4 +24,11 @@ class Printlinelist extends Token
         }
         return ret;
     }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        if (printlist != null) {
+            printlist.typeCheck(s);
+        }
+    }
 }

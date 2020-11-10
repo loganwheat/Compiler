@@ -25,4 +25,16 @@ class Printlist extends Token
         }
         return ret;
     }
+
+    public void typeCheck(Scope s) throws TypeCheckException
+    {
+        if (expr != null && readlist != null) {
+            expr.typeCheck(s);
+            readlist.typeCheck(s);
+        }
+        else if (expr != null) {
+            expr.typeCheck(s);
+        }
+        
+    }
 }
